@@ -201,25 +201,6 @@ HTML;
 ?>]]></hooks_source>
     </file>
   </hookfiles>
-  <hookextras_custom>
-    <file>
-      <filename>steamInstall.php</filename>
-      <source><![CDATA[<?php
-class steamInstall
-{
-    public function install()
-    {
-        ipsRegistry::DB()->query("ALTER TABLE ".ipsRegistry::$settings['sql_tbl_prefix']."members ADD `steamid` VARCHAR(17) NULL");    
-    }
-    public function uninstall()
-    {
-        ipsRegistry::DB()->query("ALTER TABLE ".ipsRegistry::$settings['sql_tbl_prefix']."members DROP `steamid`");    
-    }
-}
-?>
-]]></source>
-    </file>
-  </hookextras_custom>
   <hookextras_settings/>
   <hookextras_language/>
   <hookextras_modules/>
