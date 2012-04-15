@@ -26,6 +26,7 @@ Enjoy your day as all should be well!
 Updrading:
 
 Step 1:
+If you are upgrading from 1.0.1 Skip to step 2.
 First upload the files in the upload folder to your forum directory
 
 Step 2:
