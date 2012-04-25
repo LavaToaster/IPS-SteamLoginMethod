@@ -60,21 +60,12 @@ class SteamSignIn
 
         // Finally, add the all important mode. 
         $params['openid.mode'] = 'check_authentication';
-        
-        // Stored to send a Content-Length header
-        $data =  http_build_query($params);
-        $context = stream_context_create(array(
-            'http' => array(
-                'method'  => 'POST',
-                'header'  => 
-                    "Accept-language: en\r\n".
-                    "Content-type: application/x-www-form-urlencoded\r\n" .
-                    "Content-Length: " . strlen($data) . "\r\n",
-                'content' => $data,
-            ),
-        ));
-
-        $result = file_get_contents(self::STEAM_LOGIN, false, $context);
+      
+        //why do we do this? cause file_get_contents to a url goes left in many server configs... IPS is sturdier
+        $classToLoad    = IPSLib::loadLibrary( IPS_KERNEL_PATH . '/classFileManagement.php', 'classFileManagement' );
+        $classFileManagement = new $classToLoad;
+        $result = $classFileManagement->postFileContents(self::STEAM_LOGIN, $params);
+        //also... i could swear i commited this fork.
         
         // Validate wheather it's true and if we have a good ID
         preg_match("#^http://steamcommunity.com/openid/id/([0-9]{17,25})#", $_GET['openid_claimed_id'], $matches);
