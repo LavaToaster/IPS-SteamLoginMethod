@@ -32,7 +32,7 @@ class steamLinkAccount extends (~extends~)
 {         
     public function getLinks()
     {
-        $this->lang->loadLanguageFile( array( 'public_steam_login' ) );
+             ipsRegistry::getClass('class_localization')->loadLanguageFile( array( 'public_steam_login' ), 'core' );
         $return = parent::getLinks();
         foreach ($return as $tabk => $tabv)
         {
@@ -62,6 +62,7 @@ class steamLinkAccount extends (~extends~)
     {
         if ( $current_area == 'managesteam' )
         {
+         ipsRegistry::getClass('class_localization')->loadLanguageFile( array( 'public_steam_login' ), 'core' );
             require_once( IPS_ROOT_PATH . 'sources/loginauth/steam/lib/steam_openid.php' );
             $data = array();
             $data['url'] = SteamSignIn::genUrl($this->settings['board_url'].'/interface/board/linksteam.php');
@@ -121,7 +122,7 @@ class steamDisplayIcon
     {
         $this->registry = ipsRegistry::instance();
         $this->lang     = $this->registry->getClass('class_localization');
-        $this->lang->loadLanguageFile( array( 'public_steam_login' ) );
+        ipsRegistry::getClass('class_localization')->loadLanguageFile( array( 'public_steam_login' ), 'core' );
     }
            
     public function getOutput()
@@ -149,7 +150,7 @@ class steamDisplayButton
     {
         $this->registry = ipsRegistry::instance();
         $this->lang     = $this->registry->getClass('class_localization');
-        $this->lang->loadLanguageFile( array( 'public_steam_login' ) );
+          ipsRegistry::getClass('class_localization')->loadLanguageFile( array( 'public_steam_login' ), 'core' );
     }
 
     public function getOutput()
@@ -183,7 +184,7 @@ class steamDisplayButtonAjax
     {
         $this->registry = ipsRegistry::instance();
         $this->lang     = $this->registry->getClass('class_localization');
-        $this->lang->loadLanguageFile( array( 'public_steam_login' ) );
+         ipsRegistry::getClass('class_localization')->loadLanguageFile( array( 'public_steam_login' ), 'core' );
     }
     
     public function getOutput()
@@ -218,7 +219,7 @@ class steamDisplayButtonAjax2
     {
         $this->registry = ipsRegistry::instance();
         $this->lang     = $this->registry->getClass('class_localization');
-        $this->lang->loadLanguageFile( array( 'public_steam_login' ) );
+         ipsRegistry::getClass('class_localization')->loadLanguageFile( array( 'public_steam_login' ), 'core' );
     }
       
     public function getOutput()
