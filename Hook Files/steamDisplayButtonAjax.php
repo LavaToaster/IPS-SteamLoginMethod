@@ -10,13 +10,14 @@ class steamDisplayButtonAjax
     {
         $this->registry = ipsRegistry::instance();
         $this->lang     = $this->registry->getClass('class_localization');
-        $this->lang->loadLanguageFile( array( 'public_steam_login' ) );
+        ipsRegistry::getClass('class_localization')->loadLanguageFile( array( 'public_steam_login' ), 'core' );
     }
     
     public function getOutput()
     {
         $base_url = ipsRegistry::$settings['base_url'];
         $board_url = ipsRegistry::$settings['board_url'];
+        //var_dump($this->lang->words);
         $hash = ipsRegistry::instance()->member()->form_hash;
         if(IPSLib::loginMethod_enabled('facebook') || IPSLib::loginMethod_enabled('twitter') || IPSLib::loginMethod_enabled('live')){
             $IPBHTML = <<<HTML

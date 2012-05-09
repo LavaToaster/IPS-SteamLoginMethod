@@ -10,7 +10,7 @@ class steamDisplayIcon
     {
         $this->registry = ipsRegistry::instance();
         $this->lang     = $this->registry->getClass('class_localization');
-        $this->lang->loadLanguageFile( array( 'public_steam_login' ) );
+        ipsRegistry::getClass('class_localization')->loadLanguageFile( array( 'public_steam_login' ), 'core' );
     }
            
     public function getOutput()
