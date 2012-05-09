@@ -26,11 +26,10 @@ Enjoy your day as all should be well!
 Updrading:
 
 Step 1:
-If you are upgrading from 1.0.1 Skip to step 2.
-First upload the files in the upload folder to your forum directory
+First upload the files in the upload folder to your forum directory.
 
 Step 2:
-Go to your ACP and Click Manage Hooks. Browse for and import the supplied 'Steam_Login_Upgrade.xml' hook.
+Go to your ACP and Click Manage Hooks. Browse for and import the supplied 'Steam_Login.xml' hook.
 
 Step 3:
 There is no step 3, your done :P
@@ -47,6 +46,6 @@ Want to send me a donation? https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&
 
 Are you a developer? The users steam id is stored in the members table, the column name is steamid.
 
-and you can pull interesting stuff just by loading http://steamcommunity.com/profiles/<users steam id>?xml=1
+You can pull interesting stuff just by loading http://steamcommunity.com/profiles/<users steam id>?xml=1
 
-For instance my steam id is http://steamcommunity.com/profiles/76561198010571702?xml=1
+For instance my steam community page is http://steamcommunity.com/profiles/76561198010571702?xml=1
