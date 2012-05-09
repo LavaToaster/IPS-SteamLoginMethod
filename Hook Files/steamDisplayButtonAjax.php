@@ -17,7 +17,6 @@ class steamDisplayButtonAjax
     {
         $base_url = ipsRegistry::$settings['base_url'];
         $board_url = ipsRegistry::$settings['board_url'];
-        //var_dump($this->lang->words);
         $hash = ipsRegistry::instance()->member()->form_hash;
         if(IPSLib::loginMethod_enabled('facebook') || IPSLib::loginMethod_enabled('twitter') || IPSLib::loginMethod_enabled('live')){
             $IPBHTML = <<<HTML
