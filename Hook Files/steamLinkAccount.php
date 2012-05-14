@@ -4,7 +4,7 @@
  * @copyright 2012
  * @license http://opensource.org/licenses/mit-license.php The MIT License
  */
-class steamLinkAccount extends googleManageAccount
+class steamLinkAccount extends usercpForms_core
 {         
     public function getLinks()
     {
