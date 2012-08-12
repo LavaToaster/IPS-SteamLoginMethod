@@ -51,35 +51,39 @@ public function __construct( ipsRegistry $registry, $method, $conf=array() )
 */
 public function authenticate( $username, $email_address, $password )
 {
-    
+    //Does the board use HTTPS For logins?
     $board_url = ipsRegistry::$settings['logins_over_https'] ? ipsRegistry::$settings['board_url_https'] : ipsRegistry::$settings['board_url'];
-    
+
+    //If the board uses HTTPS For logins and we are not using HTTPS get our butts onto HTTPS. Why? Because open id thinks the same website using http and https are actually different ones
     if(ipsRegistry::$settings['logins_over_https'] and !$_SERVER['HTTPS']) $this->registry->output->silentRedirect( ipsRegistry::$settings['base_url_https']."app=core&amp;module=global&amp;section=login&amp;do=process&amp;use_steam=1&amp;auth_key=".ipsRegistry::instance()->member()->form_hash );
 
     $steam_url = SteamSignIn::genUrl($board_url.'/interface/board/steam.php');
     
+    // I say, Does this user be who he claims to be?
+    $steam_id = $this->request['use_steam'] ? SteamSignIn::validate() : null;
     
-    $steam_id = SteamSignIn::validate();
-
     if( !$steam_id AND $this->request['use_steam'] )
     {
         $this->registry->output->silentRedirect( $steam_url );
     }
     
     
-    
+    //Passport Please
     if ( $steam_id )
     {
-        /* Test locally */
+        //We have validated your Identity!
         $localMember = $this->DB->buildAndFetch(array('select' => 'member_id', 'from' => 'members', 'where' => "steamid='".$steam_id."'"));
-                
+        
+        //Have you been here before?        
         if ( $localMember['member_id'] )
         {
-            $this->member_data = $localMember;
+            //Welcome Back lets just log you in here
+            $this->member_data = IPSMember::load( $localMember['member_id'], 'extendedProfile,groups' );;
             $this->return_code = 'SUCCESS';
         }
         else
         {
+            //Welcome, lets just set you up a temporary account you can fill in the details in a second
             $email = $name = '';
             
             $this->member_data = $this->createLocalMember( array( 'members'            => array(
@@ -95,6 +99,7 @@ public function authenticate( $username, $email_address, $password )
                                                                                         ) );
             $this->return_code = 'SUCCESS';
         }
+        $this->request['rememberMe'] = TRUE;
         return true;
     }
 }

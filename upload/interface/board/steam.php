@@ -28,6 +28,7 @@ $_REQUEST['app']    = 'core';
 $_GET['module']     = 'global';
 $_GET['section']    = 'login';
 $_GET['do']         = 'process';
+$_GET['use_steam']  = 1;
 
 //-----------------------------------------
 // Ignore auth key for live requests
