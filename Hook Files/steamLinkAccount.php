@@ -70,8 +70,11 @@ class steamLinkAccount extends usercpForms_core
                 }
                 $this->registry->output->silentRedirect($this->settings['base_url'].'app=core&module=usercp&tab=core&area=managesteam'.$notify);
                 exit();
+            }elseif($this->request['steam'] == 'unlink'){
+                IPSMember::save( $this->memberData['member_id'], array( 'core' => array( 'steamid' => null ) ) );
+                //Update user steamid
+                $this->memberData['steamid'] = null;
             }
-            //if($this->request['error']) $this->registry->output->showError( $this->lang->words['steam_already_linked'], '1');
             return $this->registry->getClass('output')->getTemplate('ucp')->manageSteam($data);
         }
 
