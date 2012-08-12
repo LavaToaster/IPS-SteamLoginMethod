@@ -9,14 +9,175 @@
       <hook_website>http://www.lavoaster.co.uk</hook_website>
       <hook_update_check>http://www.lavoaster.co.uk/update.php?app=steam_login</hook_update_check>
       <hook_requirements><![CDATA[a:3:{s:21:"required_applications";a:0:{}s:20:"hook_php_version_min";s:0:"";s:20:"hook_php_version_max";s:0:"";}]]></hook_requirements>
-      <hook_version_human>1.0.3</hook_version_human>
-      <hook_version_long>10003</hook_version_long>
-      <hook_extra_data><![CDATA[a:4:{s:7:"display";a:3:{s:8:"language";s:146:"From core_public_steam_login: log_in_steam, manage_steam, sign_in_steam, steam_already_linked, steam_linked_account, steam_link_account, use_steam";s:9:"templates";s:26:"From skin_ucp: manageSteam";s:6:"custom";s:24:"install_steamInstall.php";}s:8:"language";a:1:{s:23:"core_public_steam_login";a:7:{s:0:"";s:12:"log_in_steam";i:1;s:12:"manage_steam";i:2;s:13:"sign_in_steam";i:3;s:20:"steam_already_linked";i:4;s:20:"steam_linked_account";i:5;s:18:"steam_link_account";i:6;s:9:"use_steam";}}s:9:"templates";a:1:{s:8:"skin_ucp";a:1:{i:0;s:11:"manageSteam";}}s:6:"custom";s:16:"steamInstall.php";}]]></hook_extra_data>
+      <hook_version_human>1.0.4</hook_version_human>
+      <hook_version_long>10004</hook_version_long>
+      <hook_extra_data><![CDATA[a:4:{s:7:"display";a:3:{s:8:"language";s:197:"From core_public_steam_login: log_in_steam, manage_steam, sign_in_steam, steam_already_linked, steam_linked_account, steam_link_account, unlink_steam, unlink_steam_desc, unlink_steam_sub, use_steam";s:9:"templates";s:26:"From skin_ucp: manageSteam";s:6:"custom";s:24:"install_steamInstall.php";}s:8:"language";a:1:{s:23:"core_public_steam_login";a:10:{s:0:"";s:12:"log_in_steam";i:1;s:12:"manage_steam";i:2;s:13:"sign_in_steam";i:3;s:20:"steam_already_linked";i:4;s:20:"steam_linked_account";i:5;s:18:"steam_link_account";i:6;s:12:"unlink_steam";i:7;s:17:"unlink_steam_desc";i:8;s:16:"unlink_steam_sub";i:9;s:9:"use_steam";}}s:9:"templates";a:1:{s:8:"skin_ucp";a:1:{i:0;s:11:"manageSteam";}}s:6:"custom";s:16:"steamInstall.php";}]]></hook_extra_data>
       <hook_key>steam_login</hook_key>
       <hook_global_caches/>
     </config>
   </hookdata>
   <hookfiles>
+    <file>
+      <hook_file_real>steamDisplayButtonAjax.php</hook_file_real>
+      <hook_type>templateHooks</hook_type>
+      <hook_classname>steamDisplayButtonAjax</hook_classname>
+      <hook_data><![CDATA[a:8:{s:12:"dataLocation";s:0:"";s:14:"libApplication";s:0:"";s:15:"classToOverload";s:0:"";s:9:"skinGroup";s:11:"skin_global";s:12:"skinFunction";s:11:"inlineLogin";s:4:"type";s:2:"if";s:2:"id";s:14:"haswindowslive";s:8:"position";s:10:"post.endif";}]]></hook_data>
+      <hooks_source><![CDATA[<?php
+/**
+ * @author Adam Lavin (Lavoaster)
+ * @copyright 2012
+ * @license http://opensource.org/licenses/mit-license.php The MIT License
+ */
+class steamDisplayButtonAjax
+{
+    public function __construct()
+    {
+        $this->registry = ipsRegistry::instance();
+        $this->lang     = $this->registry->getClass('class_localization');
+        ipsRegistry::getClass('class_localization')->loadLanguageFile( array( 'public_steam_login' ), 'core' );
+    }
+    
+    public function getOutput()
+    {
+        $base_url = ipsRegistry::$settings['base_url'];
+        $board_url = ipsRegistry::$settings['board_url'];
+        $hash = ipsRegistry::instance()->member()->form_hash;
+        if(IPSLib::loginMethod_enabled('facebook') || IPSLib::loginMethod_enabled('twitter') || IPSLib::loginMethod_enabled('live')){
+            $IPBHTML = <<<HTML
+<li><a href="{$base_url}app=core&amp;module=global&amp;section=login&amp;do=process&amp;use_steam=1&amp;auth_key={$hash}" class='ipsButton_secondary'><img src='{$board_url}/public/style_extra/signin/login-steam-icon.png' alt='Steam' /> &nbsp; {$this->lang->words['use_steam']}</a></li>
+HTML;
+        }
+        return $IPBHTML;
+    }
+}
+?>]]></hooks_source>
+    </file>
+    <file>
+      <hook_file_real>steamDisplayButtonAjax2.php</hook_file_real>
+      <hook_type>templateHooks</hook_type>
+      <hook_classname>steamDisplayButtonAjax2</hook_classname>
+      <hook_data><![CDATA[a:8:{s:12:"dataLocation";s:0:"";s:14:"libApplication";s:0:"";s:15:"classToOverload";s:0:"";s:9:"skinGroup";s:11:"skin_global";s:12:"skinFunction";s:11:"inlineLogin";s:4:"type";s:2:"if";s:2:"id";s:16:"registerServices";s:8:"position";s:11:"pre.startif";}]]></hook_data>
+      <hooks_source><![CDATA[<?php
+/**
+ * @author Adam Lavin (Lavoaster)
+ * @copyright 2012
+ * @license http://opensource.org/licenses/mit-license.php The MIT License
+ */
+class steamDisplayButtonAjax2
+{
+    public function __construct()
+    {
+        $this->registry = ipsRegistry::instance();
+        $this->lang     = $this->registry->getClass('class_localization');
+        ipsRegistry::getClass('class_localization')->loadLanguageFile( array( 'public_steam_login' ), 'core' );
+    }
+      
+    public function getOutput()
+    {
+        $base_url = ipsRegistry::$settings['base_url'];
+        $board_url = ipsRegistry::$settings['board_url'];
+        $hash = ipsRegistry::instance()->member()->form_hash;
+        if(!(IPSLib::loginMethod_enabled('facebook') || IPSLib::loginMethod_enabled('twitter') || IPSLib::loginMethod_enabled('live'))){
+            $IPBHTML = <<<HTML
+            <div class='ipsBox_notice'>
+                <ul class='ipsList_inline'>
+                    <li><a href="{$base_url}app=core&amp;module=global&amp;section=login&amp;do=process&amp;use_steam=1&amp;auth_key={$hash}" class='ipsButton_secondary'><img src='{$board_url}/public/style_extra/signin/login-steam-icon.png' alt='Steam' /> &nbsp; {$this->lang->words['use_steam']}</a></li>
+                </ul>
+            </div>
+HTML;
+        }
+        return $IPBHTML;
+    }               
+}
+?>]]></hooks_source>
+    </file>
+    <file>
+      <hook_file_real>steamHandleData.php</hook_file_real>
+      <hook_type>dataHooks</hook_type>
+      <hook_classname>steamHandleData</hook_classname>
+      <hook_data><![CDATA[a:8:{s:12:"dataLocation";s:14:"topicViewQuery";s:14:"libApplication";s:0:"";s:15:"classToOverload";s:0:"";s:9:"skinGroup";N;s:12:"skinFunction";N;s:4:"type";N;s:2:"id";N;s:8:"position";N;}]]></hook_data>
+      <hooks_source><![CDATA[<?php
+/**
+ * @author Adam Lavin (Lavoaster) (Thanks PW Atticus and Micheal from IPS Forums)
+ * @copyright 2012
+ * @license http://opensource.org/licenses/mit-license.php The MIT License
+ */
+class steamHandleData 
+{
+    public function handleData( $data )
+    {
+        /* Add additional fields to be queried */
+        $data['members'] = array_merge( $data['members'], array( 'steamid' ) );
+        
+        /* Return */
+        return $data;
+    }
+}
+?>
+]]></hooks_source>
+    </file>
+    <file>
+      <hook_file_real>steamDisplayButton.php</hook_file_real>
+      <hook_type>templateHooks</hook_type>
+      <hook_classname>steamDisplayButton</hook_classname>
+      <hook_data><![CDATA[a:8:{s:12:"dataLocation";s:0:"";s:14:"libApplication";s:0:"";s:15:"classToOverload";s:0:"";s:9:"skinGroup";s:10:"skin_login";s:12:"skinFunction";s:13:"showLogInForm";s:4:"type";s:2:"if";s:2:"id";s:14:"haswindowslive";s:8:"position";s:10:"post.endif";}]]></hook_data>
+      <hooks_source><![CDATA[<?php
+/**
+ * @author Adam Lavin (Lavoaster)
+ * @copyright 2012
+ * @license http://opensource.org/licenses/mit-license.php The MIT License
+ */
+class steamDisplayButton
+{
+    public function __construct()
+    {
+        $this->registry = ipsRegistry::instance();
+        $this->lang     = $this->registry->getClass('class_localization');
+        ipsRegistry::getClass('class_localization')->loadLanguageFile( array( 'public_steam_login' ), 'core' );
+    }
+
+    public function getOutput()
+    {
+        $base_url = ipsRegistry::$settings['base_url'];
+        $board_url = ipsRegistry::$settings['board_url'];
+        $hash = ipsRegistry::instance()->member()->form_hash;
+        $IPBHTML = <<<HTML
+<li><a href='{$base_url}app=core&amp;module=global&amp;section=login&amp;do=process&amp;use_steam=1&amp;auth_key={$hash}' class='ipsButton_secondary fixed_width'><img src='{$board_url}/public/style_extra/signin/login-steam-icon.png' alt='Steam' /> &nbsp; {$this->lang->words['sign_in_steam']}</a></li>
+HTML;
+
+        return $IPBHTML;
+    }
+}
+?>]]></hooks_source>
+    </file>
+    <file>
+      <hook_file_real>steamDisplayIcon.php</hook_file_real>
+      <hook_type>templateHooks</hook_type>
+      <hook_classname>steamDisplayIcon</hook_classname>
+      <hook_data><![CDATA[a:8:{s:12:"dataLocation";s:0:"";s:14:"libApplication";s:0:"";s:15:"classToOverload";s:0:"";s:9:"skinGroup";s:11:"skin_global";s:12:"skinFunction";s:14:"globalTemplate";s:4:"type";s:2:"if";s:2:"id";s:10:"limWindows";s:8:"position";s:10:"post.endif";}]]></hook_data>
+      <hooks_source><![CDATA[<?php
+/**
+ * @author Adam Lavin (Lavoaster)
+ * @copyright 2012
+ * @license http://opensource.org/licenses/mit-license.php The MIT License
+ */
+class steamDisplayIcon
+{
+    public function __construct()
+    {
+        $this->registry = ipsRegistry::instance();
+        $this->lang     = $this->registry->getClass('class_localization');
+        ipsRegistry::getClass('class_localization')->loadLanguageFile( array( 'public_steam_login' ), 'core' );
+    }
+           
+    public function getOutput()
+    {   
+        $IPBHTML = "<a href='".ipsRegistry::$settings['base_url']."app=core&amp;module=global&amp;section=login&amp;do=process&amp;use_steam=1&amp;auth_key=".ipsRegistry::instance()->member()->form_hash."'><img src='".ipsRegistry::$settings['board_url']."/public/style_extra/signin/login-steam-icon.png' alt='{$this->lang->words['log_in_steam']}' /></a>";
+        return $IPBHTML;
+    }
+}
+?>]]></hooks_source>
+    </file>
     <file>
       <hook_file_real>steamDisplayButtonRegister2.php</hook_file_real>
       <hook_type>templateHooks</hook_type>
@@ -53,6 +214,41 @@ class steamDisplayButtonRegister2
                             </ul>
                         </div>
                     </div>
+HTML;
+        }
+        return $IPBHTML;
+    }
+}
+?>]]></hooks_source>
+    </file>
+    <file>
+      <hook_file_real>steamDisplayButtonRegister.php</hook_file_real>
+      <hook_type>templateHooks</hook_type>
+      <hook_classname>steamDisplayButtonRegister</hook_classname>
+      <hook_data><![CDATA[a:8:{s:12:"dataLocation";s:0:"";s:14:"libApplication";s:0:"";s:15:"classToOverload";s:0:"";s:9:"skinGroup";s:13:"skin_register";s:12:"skinFunction";s:12:"registerForm";s:4:"type";s:2:"if";s:2:"id";s:10:"twitterBox";s:8:"position";s:10:"post.endif";}]]></hook_data>
+      <hooks_source><![CDATA[<?php
+/**
+ * @author Adam Lavin (Lavoaster)
+ * @copyright 2012
+ * @license http://opensource.org/licenses/mit-license.php The MIT License
+ */
+class steamDisplayButtonRegister
+{
+    public function __construct()
+    {
+        $this->registry = ipsRegistry::instance();
+        $this->lang     = $this->registry->getClass('class_localization');
+        ipsRegistry::getClass('class_localization')->loadLanguageFile( array( 'public_steam_login' ), 'core' );
+    }
+    
+    public function getOutput()
+    {
+        $base_url = ipsRegistry::$settings['base_url'];
+        $board_url = ipsRegistry::$settings['board_url'];
+        $hash = ipsRegistry::instance()->member()->form_hash;
+        if(IPSLib::loginMethod_enabled('facebook') || IPSLib::loginMethod_enabled('twitter')){
+            $IPBHTML = <<<HTML
+<li><a href="{$base_url}app=core&amp;module=global&amp;section=login&amp;do=process&amp;use_steam=1&amp;auth_key={$hash}"><img src='{$board_url}/public/style_extra/signin/login-steam.png' alt='Steam' /></a></li>
 HTML;
         }
         return $IPBHTML;
@@ -137,210 +333,17 @@ class steamLinkAccount extends (~extends~)
                 }
                 $this->registry->output->silentRedirect($this->settings['base_url'].'app=core&module=usercp&tab=core&area=managesteam'.$notify);
                 exit();
+            }elseif($this->request['steam'] == 'unlink'){
+                IPSMember::save( $this->memberData['member_id'], array( 'core' => array( 'steamid' => null ) ) );
+                //Update user steamid
+                $this->memberData['steamid'] = null;
             }
-            //if($this->request['error']) $this->registry->output->showError( $this->lang->words['steam_already_linked'], '1');
             return $this->registry->getClass('output')->getTemplate('ucp')->manageSteam($data);
         }
 
         return parent::showForm( $current_area, $errors );
     }
 } 
-?>]]></hooks_source>
-    </file>
-    <file>
-      <hook_file_real>steamDisplayButtonRegister.php</hook_file_real>
-      <hook_type>templateHooks</hook_type>
-      <hook_classname>steamDisplayButtonRegister</hook_classname>
-      <hook_data><![CDATA[a:8:{s:12:"dataLocation";s:0:"";s:14:"libApplication";s:0:"";s:15:"classToOverload";s:0:"";s:9:"skinGroup";s:13:"skin_register";s:12:"skinFunction";s:12:"registerForm";s:4:"type";s:2:"if";s:2:"id";s:10:"twitterBox";s:8:"position";s:10:"post.endif";}]]></hook_data>
-      <hooks_source><![CDATA[<?php
-/**
- * @author Adam Lavin (Lavoaster)
- * @copyright 2012
- * @license http://opensource.org/licenses/mit-license.php The MIT License
- */
-class steamDisplayButtonRegister
-{
-    public function __construct()
-    {
-        $this->registry = ipsRegistry::instance();
-        $this->lang     = $this->registry->getClass('class_localization');
-        ipsRegistry::getClass('class_localization')->loadLanguageFile( array( 'public_steam_login' ), 'core' );
-    }
-    
-    public function getOutput()
-    {
-        $base_url = ipsRegistry::$settings['base_url'];
-        $board_url = ipsRegistry::$settings['board_url'];
-        $hash = ipsRegistry::instance()->member()->form_hash;
-        if(IPSLib::loginMethod_enabled('facebook') || IPSLib::loginMethod_enabled('twitter')){
-            $IPBHTML = <<<HTML
-<li><a href="{$base_url}app=core&amp;module=global&amp;section=login&amp;do=process&amp;use_steam=1&amp;auth_key={$hash}"><img src='{$board_url}/public/style_extra/signin/login-steam.png' alt='Steam' /></a></li>
-HTML;
-        }
-        return $IPBHTML;
-    }
-}
-?>]]></hooks_source>
-    </file>
-    <file>
-      <hook_file_real>steamDisplayIcon.php</hook_file_real>
-      <hook_type>templateHooks</hook_type>
-      <hook_classname>steamDisplayIcon</hook_classname>
-      <hook_data><![CDATA[a:8:{s:12:"dataLocation";s:0:"";s:14:"libApplication";s:0:"";s:15:"classToOverload";s:0:"";s:9:"skinGroup";s:11:"skin_global";s:12:"skinFunction";s:14:"globalTemplate";s:4:"type";s:2:"if";s:2:"id";s:10:"limWindows";s:8:"position";s:10:"post.endif";}]]></hook_data>
-      <hooks_source><![CDATA[<?php
-/**
- * @author Adam Lavin (Lavoaster)
- * @copyright 2012
- * @license http://opensource.org/licenses/mit-license.php The MIT License
- */
-class steamDisplayIcon
-{
-    public function __construct()
-    {
-        $this->registry = ipsRegistry::instance();
-        $this->lang     = $this->registry->getClass('class_localization');
-        ipsRegistry::getClass('class_localization')->loadLanguageFile( array( 'public_steam_login' ), 'core' );
-    }
-           
-    public function getOutput()
-    {   
-        $IPBHTML = "<a href='".ipsRegistry::$settings['base_url']."app=core&amp;module=global&amp;section=login&amp;do=process&amp;use_steam=1&amp;auth_key=".ipsRegistry::instance()->member()->form_hash."'><img src='".ipsRegistry::$settings['board_url']."/public/style_extra/signin/login-steam-icon.png' alt='{$this->lang->words['log_in_steam']}' /></a>";
-        return $IPBHTML;
-    }
-}
-?>]]></hooks_source>
-    </file>
-    <file>
-      <hook_file_real>steamDisplayButton.php</hook_file_real>
-      <hook_type>templateHooks</hook_type>
-      <hook_classname>steamDisplayButton</hook_classname>
-      <hook_data><![CDATA[a:8:{s:12:"dataLocation";s:0:"";s:14:"libApplication";s:0:"";s:15:"classToOverload";s:0:"";s:9:"skinGroup";s:10:"skin_login";s:12:"skinFunction";s:13:"showLogInForm";s:4:"type";s:2:"if";s:2:"id";s:14:"haswindowslive";s:8:"position";s:10:"post.endif";}]]></hook_data>
-      <hooks_source><![CDATA[<?php
-/**
- * @author Adam Lavin (Lavoaster)
- * @copyright 2012
- * @license http://opensource.org/licenses/mit-license.php The MIT License
- */
-class steamDisplayButton
-{
-    public function __construct()
-    {
-        $this->registry = ipsRegistry::instance();
-        $this->lang     = $this->registry->getClass('class_localization');
-        ipsRegistry::getClass('class_localization')->loadLanguageFile( array( 'public_steam_login' ), 'core' );
-    }
-
-    public function getOutput()
-    {
-        $base_url = ipsRegistry::$settings['base_url'];
-        $board_url = ipsRegistry::$settings['board_url'];
-        $hash = ipsRegistry::instance()->member()->form_hash;
-        $IPBHTML = <<<HTML
-<li><a href='{$base_url}app=core&amp;module=global&amp;section=login&amp;do=process&amp;use_steam=1&amp;auth_key={$hash}' class='ipsButton_secondary fixed_width'><img src='{$board_url}/public/style_extra/signin/login-steam-icon.png' alt='Steam' /> &nbsp; {$this->lang->words['sign_in_steam']}</a></li>
-HTML;
-
-        return $IPBHTML;
-    }
-}
-?>]]></hooks_source>
-    </file>
-    <file>
-      <hook_file_real>steamDisplayButtonAjax.php</hook_file_real>
-      <hook_type>templateHooks</hook_type>
-      <hook_classname>steamDisplayButtonAjax</hook_classname>
-      <hook_data><![CDATA[a:8:{s:12:"dataLocation";s:0:"";s:14:"libApplication";s:0:"";s:15:"classToOverload";s:0:"";s:9:"skinGroup";s:11:"skin_global";s:12:"skinFunction";s:11:"inlineLogin";s:4:"type";s:2:"if";s:2:"id";s:14:"haswindowslive";s:8:"position";s:10:"post.endif";}]]></hook_data>
-      <hooks_source><![CDATA[<?php
-/**
- * @author Adam Lavin (Lavoaster)
- * @copyright 2012
- * @license http://opensource.org/licenses/mit-license.php The MIT License
- */
-class steamDisplayButtonAjax
-{
-    public function __construct()
-    {
-        $this->registry = ipsRegistry::instance();
-        $this->lang     = $this->registry->getClass('class_localization');
-        ipsRegistry::getClass('class_localization')->loadLanguageFile( array( 'public_steam_login' ), 'core' );
-    }
-    
-    public function getOutput()
-    {
-        $base_url = ipsRegistry::$settings['base_url'];
-        $board_url = ipsRegistry::$settings['board_url'];
-        $hash = ipsRegistry::instance()->member()->form_hash;
-        if(IPSLib::loginMethod_enabled('facebook') || IPSLib::loginMethod_enabled('twitter') || IPSLib::loginMethod_enabled('live')){
-            $IPBHTML = <<<HTML
-<li><a href="{$base_url}app=core&amp;module=global&amp;section=login&amp;do=process&amp;use_steam=1&amp;auth_key={$hash}" class='ipsButton_secondary'><img src='{$board_url}/public/style_extra/signin/login-steam-icon.png' alt='Steam' /> &nbsp; {$this->lang->words['use_steam']}</a></li>
-HTML;
-        }
-        return $IPBHTML;
-    }
-}
-?>]]></hooks_source>
-    </file>
-    <file>
-      <hook_file_real>steamHandleData.php</hook_file_real>
-      <hook_type>dataHooks</hook_type>
-      <hook_classname>steamHandleData</hook_classname>
-      <hook_data><![CDATA[a:8:{s:12:"dataLocation";s:14:"topicViewQuery";s:14:"libApplication";s:0:"";s:15:"classToOverload";s:0:"";s:9:"skinGroup";N;s:12:"skinFunction";N;s:4:"type";N;s:2:"id";N;s:8:"position";N;}]]></hook_data>
-      <hooks_source><![CDATA[<?php
-/**
- * @author Adam Lavin (Lavoaster) (Thanks PW Atticus and Micheal from IPS Forums)
- * @copyright 2012
- * @license http://opensource.org/licenses/mit-license.php The MIT License
- */
-class steamHandleData 
-{
-    public function handleData( $data )
-    {
-        /* Add additional fields to be queried */
-        $data['members'] = array_merge( $data['members'], array( 'steamid' ) );
-        
-        /* Return */
-        return $data;
-    }
-}
-?>
-]]></hooks_source>
-    </file>
-    <file>
-      <hook_file_real>steamDisplayButtonAjax2.php</hook_file_real>
-      <hook_type>templateHooks</hook_type>
-      <hook_classname>steamDisplayButtonAjax2</hook_classname>
-      <hook_data><![CDATA[a:8:{s:12:"dataLocation";s:0:"";s:14:"libApplication";s:0:"";s:15:"classToOverload";s:0:"";s:9:"skinGroup";s:11:"skin_global";s:12:"skinFunction";s:11:"inlineLogin";s:4:"type";s:2:"if";s:2:"id";s:16:"registerServices";s:8:"position";s:11:"pre.startif";}]]></hook_data>
-      <hooks_source><![CDATA[<?php
-/**
- * @author Adam Lavin (Lavoaster)
- * @copyright 2012
- * @license http://opensource.org/licenses/mit-license.php The MIT License
- */
-class steamDisplayButtonAjax2
-{
-    public function __construct()
-    {
-        $this->registry = ipsRegistry::instance();
-        $this->lang     = $this->registry->getClass('class_localization');
-        ipsRegistry::getClass('class_localization')->loadLanguageFile( array( 'public_steam_login' ), 'core' );
-    }
-      
-    public function getOutput()
-    {
-        $base_url = ipsRegistry::$settings['base_url'];
-        $board_url = ipsRegistry::$settings['board_url'];
-        $hash = ipsRegistry::instance()->member()->form_hash;
-        if(!(IPSLib::loginMethod_enabled('facebook') || IPSLib::loginMethod_enabled('twitter') || IPSLib::loginMethod_enabled('live'))){
-            $IPBHTML = <<<HTML
-            <div class='ipsBox_notice'>
-                <ul class='ipsList_inline'>
-                    <li><a href="{$base_url}app=core&amp;module=global&amp;section=login&amp;do=process&amp;use_steam=1&amp;auth_key={$hash}" class='ipsButton_secondary'><img src='{$board_url}/public/style_extra/signin/login-steam-icon.png' alt='Steam' /> &nbsp; {$this->lang->words['use_steam']}</a></li>
-                </ul>
-            </div>
-HTML;
-        }
-        return $IPBHTML;
-    }               
-}
 ?>]]></hooks_source>
     </file>
   </hookfiles>
@@ -412,6 +415,24 @@ class steamInstall
       <word_key>steam_linked_account</word_key>
       <word_default>This account has been, or is already, successfully linked with a steam account.</word_default>
     </language>
+    <language>
+      <word_app>core</word_app>
+      <word_pack>public_steam_login</word_pack>
+      <word_key>unlink_steam</word_key>
+      <word_default>Unlink Steam Account</word_default>
+    </language>
+    <language>
+      <word_app>core</word_app>
+      <word_pack>public_steam_login</word_pack>
+      <word_key>unlink_steam_desc</word_key>
+      <word_default>Clicking this button will unlink your steam account from your forum account so you will no longer be able to sign in using it.</word_default>
+    </language>
+    <language>
+      <word_app>core</word_app>
+      <word_pack>public_steam_login</word_pack>
+      <word_key>unlink_steam_sub</word_key>
+      <word_default>Unlink your steam account.</word_default>
+    </language>
   </hookextras_language>
   <hookextras_modules/>
   <hookextras_help/>
@@ -435,6 +456,9 @@ class steamInstall
     <div>
         <p class='message'>{$this->lang->words['steam_linked_account']}</p>
         <br />
+        <h3 class='ipsType_subtitle'>{$this->lang->words['unlink_steam_sub']}</h3>
+        <p>{$this->lang->words['unlink_steam_desc']}</p><br />
+        <p><a href="{$this->settings['base_url']}app=core&module=usercp&tab=core&area=managesteam&steam=unlink" class='ipsButton_secondary'>{$this->lang->words['unlink_steam']}</a></p>
     </div>
 </if>]]></template_content>
       <template_name>manageSteam</template_name>
