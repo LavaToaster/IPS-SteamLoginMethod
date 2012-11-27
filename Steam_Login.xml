@@ -9,9 +9,9 @@
       <hook_website>http://www.lavoaster.co.uk</hook_website>
       <hook_update_check>http://www.lavoaster.co.uk/update.php?app=steam_login</hook_update_check>
       <hook_requirements><![CDATA[a:3:{s:21:"required_applications";a:0:{}s:20:"hook_php_version_min";s:0:"";s:20:"hook_php_version_max";s:0:"";}]]></hook_requirements>
-      <hook_version_human>1.0.4</hook_version_human>
-      <hook_version_long>10004</hook_version_long>
-      <hook_extra_data><![CDATA[a:4:{s:7:"display";a:3:{s:8:"language";s:197:"From core_public_steam_login: log_in_steam, manage_steam, sign_in_steam, steam_already_linked, steam_linked_account, steam_link_account, unlink_steam, unlink_steam_desc, unlink_steam_sub, use_steam";s:9:"templates";s:26:"From skin_ucp: manageSteam";s:6:"custom";s:24:"install_steamInstall.php";}s:8:"language";a:1:{s:23:"core_public_steam_login";a:10:{s:0:"";s:12:"log_in_steam";i:1;s:12:"manage_steam";i:2;s:13:"sign_in_steam";i:3;s:20:"steam_already_linked";i:4;s:20:"steam_linked_account";i:5;s:18:"steam_link_account";i:6;s:12:"unlink_steam";i:7;s:17:"unlink_steam_desc";i:8;s:16:"unlink_steam_sub";i:9;s:9:"use_steam";}}s:9:"templates";a:1:{s:8:"skin_ucp";a:1:{i:0;s:11:"manageSteam";}}s:6:"custom";s:16:"steamInstall.php";}]]></hook_extra_data>
+      <hook_version_human>1.0.5</hook_version_human>
+      <hook_version_long>10005</hook_version_long>
+      <hook_extra_data><![CDATA[a:3:{s:7:"display";a:3:{s:8:"language";s:197:"From core_public_steam_login: log_in_steam, manage_steam, sign_in_steam, steam_already_linked, steam_linked_account, steam_link_account, unlink_steam, unlink_steam_desc, unlink_steam_sub, use_steam";s:9:"templates";s:26:"From skin_ucp: manageSteam";s:6:"custom";s:16:"steamInstall.php";}s:8:"language";a:1:{s:18:"public_steam_login";a:10:{i:0;s:9:"use_steam";i:1;s:13:"sign_in_steam";i:2;s:12:"manage_steam";i:3;s:20:"steam_already_linked";i:4;s:12:"log_in_steam";i:5;s:18:"steam_link_account";i:6;s:20:"steam_linked_account";i:7;s:12:"unlink_steam";i:8;s:17:"unlink_steam_desc";i:9;s:16:"unlink_steam_sub";}}s:9:"templates";a:1:{s:8:"skin_ucp";a:1:{s:11:"manageSteam";s:11:"manageSteam";}}}]]></hook_extra_data>
       <hook_key>steam_login</hook_key>
       <hook_global_caches/>
     </config>
@@ -172,7 +172,7 @@ class steamDisplayIcon
            
     public function getOutput()
     {   
-        $IPBHTML = "<a href='".ipsRegistry::$settings['base_url']."app=core&amp;module=global&amp;section=login&amp;do=process&amp;use_steam=1&amp;auth_key=".ipsRegistry::instance()->member()->form_hash."'><img src='".ipsRegistry::$settings['board_url']."/public/style_extra/signin/login-steam-icon.png' alt='{$this->lang->words['log_in_steam']}' /></a>";
+        $IPBHTML = "<a href='".ipsRegistry::$settings['base_url']."app=core&amp;module=global&amp;section=login&amp;do=process&amp;use_steam=1&amp;auth_key=".ipsRegistry::instance()->member()->form_hash."'><img src='".ipsRegistry::$settings['board_url']."/public/style_extra/signin/login-steam-icon.png' alt='{$this->lang->words['log_in_steam']}' /></a>\n";
         return $IPBHTML;
     }
 }
@@ -347,93 +347,8 @@ class steamLinkAccount extends (~extends~)
 ?>]]></hooks_source>
     </file>
   </hookfiles>
-  <hookextras_custom>
-    <file>
-      <filename>steamInstall.php</filename>
-      <source><![CDATA[<?php
-class steamInstall
-{
-    public function install()
-    {
-        if(!ipsRegistry::DB()->checkForField('steamid', 'members'))
-        {
-            ipsRegistry::DB()->addField('members', 'steamid', 'VARCHAR(17)', NULL);
-        }
-    }
-    public function uninstall()
-    {
-        if(ipsRegistry::DB()->checkForField('steamid', 'members'))
-        {
-            ipsRegistry::DB()->dropField('members', 'steamid');
-        }
-    }
-}
-?>]]></source>
-    </file>
-  </hookextras_custom>
   <hookextras_settings/>
-  <hookextras_language>
-    <language>
-      <word_app>core</word_app>
-      <word_pack>public_steam_login</word_pack>
-      <word_key>use_steam</word_key>
-      <word_default>Use Steam</word_default>
-    </language>
-    <language>
-      <word_app>core</word_app>
-      <word_pack>public_steam_login</word_pack>
-      <word_key>sign_in_steam</word_key>
-      <word_default>Sign In with Steam </word_default>
-    </language>
-    <language>
-      <word_app>core</word_app>
-      <word_pack>public_steam_login</word_pack>
-      <word_key>manage_steam</word_key>
-      <word_default>Manage Steam</word_default>
-    </language>
-    <language>
-      <word_app>core</word_app>
-      <word_pack>public_steam_login</word_pack>
-      <word_key>steam_already_linked</word_key>
-      <word_default>This steam account is already associated with another account on this site.</word_default>
-    </language>
-    <language>
-      <word_app>core</word_app>
-      <word_pack>public_steam_login</word_pack>
-      <word_key>log_in_steam</word_key>
-      <word_default>Log In with Steam </word_default>
-    </language>
-    <language>
-      <word_app>core</word_app>
-      <word_pack>public_steam_login</word_pack>
-      <word_key>steam_link_account</word_key>
-      <word_default>Your account is currently not linked with a steam account. To link it to one press the button below.</word_default>
-    </language>
-    <language>
-      <word_app>core</word_app>
-      <word_pack>public_steam_login</word_pack>
-      <word_key>steam_linked_account</word_key>
-      <word_default>This account has been, or is already, successfully linked with a steam account.</word_default>
-    </language>
-    <language>
-      <word_app>core</word_app>
-      <word_pack>public_steam_login</word_pack>
-      <word_key>unlink_steam</word_key>
-      <word_default>Unlink Steam Account</word_default>
-    </language>
-    <language>
-      <word_app>core</word_app>
-      <word_pack>public_steam_login</word_pack>
-      <word_key>unlink_steam_desc</word_key>
-      <word_default>Clicking this button will unlink your steam account from your forum account so you will no longer be able to sign in using it.</word_default>
-    </language>
-    <language>
-      <word_app>core</word_app>
-      <word_pack>public_steam_login</word_pack>
-      <word_key>unlink_steam_sub</word_key>
-      <word_default>Unlink your steam account.</word_default>
-    </language>
-  </hookextras_language>
+  <hookextras_language/>
   <hookextras_modules/>
   <hookextras_help/>
   <hookextras_templates>
@@ -467,7 +382,7 @@ class steamInstall
       <template_removable>1</template_removable>
       <template_added_to>1</template_added_to>
       <template_user_added>1</template_user_added>
-      <template_user_edited>1</template_user_edited>
+      <template_user_edited>0</template_user_edited>
       <template_master_key>root</template_master_key>
     </templates>
   </hookextras_templates>
