@@ -25,8 +25,8 @@ Enjoy your day as all should be well!
 
 Updrading:
 
-Step 1:
-First upload the files in the upload folder to your forum directory.
+Step 1 (Skip to Step 2 if you are upgrading from 1.0.4):
+First upload the files in the upload folder to your forum directory
 
 Step 2:
 Go to your ACP and Click Manage Hooks. Browse for and import the supplied 'Steam_Login.xml' hook.
