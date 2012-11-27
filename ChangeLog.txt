@@ -1,3 +1,6 @@
+1.0.5
+Fixed - Following icon from steam not being spaced properly
+
 1.0.4
 Removed potentially unused requests being made when using a differnt login method.
 Forced the login to set a "Remember Me" cookie so members are not logged out after an amount of time.
