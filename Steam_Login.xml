@@ -472,7 +472,7 @@ class steamInstall
         <div class='ipsField_content'>
             <ul class='ipsList_inline'>
 </if>
-                <li><a href="{parse url="app=core&amp;module=global&amp;section=login&amp;do=process&amp;use_steam=1&amp;auth_key={$this->member->form_hash}" base="public"}" class="ipsButton_secondary"><img src="{$this->settings['public_dir']}/style_extra/signin/login-steam.png" alt="Steam"></a></li>
+                <li><a href="{parse url="app=core&amp;module=global&amp;section=login&amp;do=process&amp;use_steam=1&amp;auth_key={$this->member->form_hash}" base="public"}"><img src="{$this->settings['public_dir']}/style_extra/signin/login-steam.png" alt="Steam"></a></li>
 <if test="loginButtonWrapEnd:|:$wrapButton"> 
             </ul>
         </div>

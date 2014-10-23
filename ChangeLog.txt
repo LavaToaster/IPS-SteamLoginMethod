@@ -2,6 +2,7 @@
 Fixed - Database columns not being added - Re-added install script to XML
 Fixed - When determining the urls to be generated use the login over https setting rather than trying to work out if the browser is currently on a secure connection
 Fixed - Missing language string - Re-added language bits to xml
+Improvement - Refactored all template replacement strings into templates
 
 
 1.0.5
