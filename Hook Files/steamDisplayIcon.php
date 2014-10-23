@@ -10,13 +10,11 @@ class steamDisplayIcon
     public function __construct()
     {
         $this->registry = ipsRegistry::instance();
-        $this->lang = $this->registry->getClass('class_localization');
         ipsRegistry::getClass('class_localization')->loadLanguageFile(array('public_steam_login'), 'core');
     }
 
     public function getOutput()
     {
-        $IPBHTML = "<a href='" . ipsRegistry::$settings['base_url'] . "app=core&amp;module=global&amp;section=login&amp;do=process&amp;use_steam=1&amp;auth_key=" . ipsRegistry::instance()->member()->form_hash . "'><img src='" . ipsRegistry::$settings['board_url'] . "/public/style_extra/signin/login-steam-icon.png' alt='{$this->lang->words['log_in_steam']}' /></a>\n";
-        return $IPBHTML;
+        return $this->registry->getClass('output')->getTemplate('steamlogin')->globalTemplateIcon();
     }
 }
