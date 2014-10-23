@@ -1,3 +1,9 @@
+1.0.6 
+Fixed - Database columns not being added - Re-added install script to XML
+Fixed - When determining the urls to be generated use the login over https setting rather than trying to work out if the browser is currently on a secure connection
+Fixed - Missing language string - Re-added language bits to xml
+
+
 1.0.5
 Fixed - Following icon from steam not being spaced properly
 
