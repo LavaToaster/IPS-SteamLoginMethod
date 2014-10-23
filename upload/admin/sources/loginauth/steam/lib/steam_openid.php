@@ -1,4 +1,5 @@
 <?php
+
 /**
  *
  * @package Steam Community API
@@ -6,7 +7,6 @@
  * @license http://opensource.org/licenses/mit-license.php The MIT License
  *
  */
-
 class SteamSignIn
 {
     const STEAM_LOGIN = 'https://steamcommunity.com/openid/login';
@@ -25,12 +25,12 @@ class SteamSignIn
         }
 
         $params = array(
-            'openid.ns'            => 'http://specs.openid.net/auth/2.0',
-            'openid.mode'        => 'checkid_setup',
-            'openid.return_to'    => $returnTo,
-            'openid.realm'        => (ipsRegistry::$settings['logins_over_https'] ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'],
-            'openid.identity'    => 'http://specs.openid.net/auth/2.0/identifier_select',
-            'openid.claimed_id'    => 'http://specs.openid.net/auth/2.0/identifier_select',
+            'openid.ns' => 'http://specs.openid.net/auth/2.0',
+            'openid.mode' => 'checkid_setup',
+            'openid.return_to' => $returnTo,
+            'openid.realm' => (ipsRegistry::$settings['logins_over_https'] ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'],
+            'openid.identity' => 'http://specs.openid.net/auth/2.0/identifier_select',
+            'openid.claimed_id' => 'http://specs.openid.net/auth/2.0/identifier_select',
         );
 
         $sep = ($useAmp) ? '&amp;' : '&';
@@ -47,16 +47,15 @@ class SteamSignIn
     {
         // Start off with some basic params
         $params = array(
-            'openid.assoc_handle'    => $_GET['openid_assoc_handle'],
-            'openid.signed'            => $_GET['openid_signed'],
-            'openid.sig'            => $_GET['openid_sig'],
-            'openid.ns'                => 'http://specs.openid.net/auth/2.0',
+            'openid.assoc_handle' => $_GET['openid_assoc_handle'],
+            'openid.signed' => $_GET['openid_signed'],
+            'openid.sig' => $_GET['openid_sig'],
+            'openid.ns' => 'http://specs.openid.net/auth/2.0',
         );
 
         // Get all the params that were sent back and resend them for validation
         $signed = explode(',', $_GET['openid_signed']);
-        foreach($signed as $item)
-        {
+        foreach ($signed as $item) {
             $val = $_GET['openid_' . str_replace('.', '_', $item)];
             $params['openid.' . $item] = get_magic_quotes_gpc() ? stripslashes($val) : $val;
         }
@@ -65,7 +64,7 @@ class SteamSignIn
         $params['openid.mode'] = 'check_authentication';
 
         //why do we do this? cause file_get_contents to a url goes left in many server configs... IPS is sturdier
-        $classToLoad    = IPSLib::loadLibrary( IPS_KERNEL_PATH . '/classFileManagement.php', 'classFileManagement' );
+        $classToLoad = IPSLib::loadLibrary(IPS_KERNEL_PATH . '/classFileManagement.php', 'classFileManagement');
         $classFileManagement = new $classToLoad;
         $result = $classFileManagement->postFileContents(self::STEAM_LOGIN, $params);
         //also... i could swear i commited this fork.

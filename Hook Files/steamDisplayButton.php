@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @author Adam Lavin (Lavoaster)
  * @copyright 2012
@@ -9,8 +10,8 @@ class steamDisplayButton
     public function __construct()
     {
         $this->registry = ipsRegistry::instance();
-        $this->lang     = $this->registry->getClass('class_localization');
-        ipsRegistry::getClass('class_localization')->loadLanguageFile( array( 'public_steam_login' ), 'core' );
+        $this->lang = $this->registry->getClass('class_localization');
+        ipsRegistry::getClass('class_localization')->loadLanguageFile(array('public_steam_login'), 'core');
     }
 
     public function getOutput()
@@ -25,4 +26,3 @@ HTML;
         return $IPBHTML;
     }
 }
-?>
