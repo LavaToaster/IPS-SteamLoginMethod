@@ -362,7 +362,68 @@ class steamInstall
     </file>
   </hookextras_custom>
   <hookextras_settings/>
-  <hookextras_language/>
+  <hookextras_language>
+      <language>
+          <word_app>core</word_app>
+          <word_pack>public_steam_login</word_pack>
+          <word_key>use_steam</word_key>
+          <word_default>Use Steam</word_default>
+      </language>
+      <language>
+          <word_app>core</word_app>
+          <word_pack>public_steam_login</word_pack>
+          <word_key>sign_in_steam</word_key>
+          <word_default>Sign In with Steam </word_default>
+      </language>
+      <language>
+          <word_app>core</word_app>
+          <word_pack>public_steam_login</word_pack>
+          <word_key>manage_steam</word_key>
+          <word_default>Manage Steam</word_default>
+      </language>
+      <language>
+          <word_app>core</word_app>
+          <word_pack>public_steam_login</word_pack>
+          <word_key>steam_already_linked</word_key>
+          <word_default>This steam account is already associated with another account on this site.</word_default>
+      </language>
+      <language>
+          <word_app>core</word_app>
+          <word_pack>public_steam_login</word_pack>
+          <word_key>log_in_steam</word_key>
+          <word_default>Log In with Steam </word_default>
+      </language>
+      <language>
+          <word_app>core</word_app>
+          <word_pack>public_steam_login</word_pack>
+          <word_key>steam_link_account</word_key>
+          <word_default>Your account is currently not linked with a steam account. To link it to one press the button below.</word_default>
+      </language>
+      <language>
+          <word_app>core</word_app>
+          <word_pack>public_steam_login</word_pack>
+          <word_key>steam_linked_account</word_key>
+          <word_default>This account has been, or is already, successfully linked with a steam account.</word_default>
+      </language>
+      <language>
+          <word_app>core</word_app>
+          <word_pack>public_steam_login</word_pack>
+          <word_key>unlink_steam</word_key>
+          <word_default>Unlink Steam Account</word_default>
+      </language>
+      <language>
+          <word_app>core</word_app>
+          <word_pack>public_steam_login</word_pack>
+          <word_key>unlink_steam_desc</word_key>
+          <word_default>Clicking this button will unlink your steam account from your forum account so you will no longer be able to sign in using it.</word_default>
+      </language>
+      <language>
+          <word_app>core</word_app>
+          <word_pack>public_steam_login</word_pack>
+          <word_key>unlink_steam_sub</word_key>
+          <word_default>Unlink your steam account.</word_default>
+      </language>
+  </hookextras_language>
   <hookextras_modules/>
   <hookextras_help/>
   <hookextras_templates>
