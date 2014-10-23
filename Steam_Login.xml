@@ -11,7 +11,7 @@
       <hook_requirements><![CDATA[a:3:{s:21:"required_applications";a:0:{}s:20:"hook_php_version_min";s:0:"";s:20:"hook_php_version_max";s:0:"";}]]></hook_requirements>
       <hook_version_human>1.0.5</hook_version_human>
       <hook_version_long>10005</hook_version_long>
-      <hook_extra_data><![CDATA[a:3:{s:7:"display";a:3:{s:8:"language";s:197:"From core_public_steam_login: log_in_steam, manage_steam, sign_in_steam, steam_already_linked, steam_linked_account, steam_link_account, unlink_steam, unlink_steam_desc, unlink_steam_sub, use_steam";s:9:"templates";s:26:"From skin_ucp: manageSteam";s:6:"custom";s:16:"steamInstall.php";}s:8:"language";a:1:{s:18:"public_steam_login";a:10:{i:0;s:9:"use_steam";i:1;s:13:"sign_in_steam";i:2;s:12:"manage_steam";i:3;s:20:"steam_already_linked";i:4;s:12:"log_in_steam";i:5;s:18:"steam_link_account";i:6;s:20:"steam_linked_account";i:7;s:12:"unlink_steam";i:8;s:17:"unlink_steam_desc";i:9;s:16:"unlink_steam_sub";}}s:9:"templates";a:1:{s:8:"skin_ucp";a:1:{s:11:"manageSteam";s:11:"manageSteam";}}}]]></hook_extra_data>
+      <hook_extra_data><![CDATA[a:3:{s:7:"display";a:3:{s:8:"language";s:197:"From core_public_steam_login: log_in_steam, manage_steam, sign_in_steam, steam_already_linked, steam_linked_account, steam_link_account, unlink_steam, unlink_steam_desc, unlink_steam_sub, use_steam";s:9:"templates";s:26:"From skin_ucp: manageSteam";s:6:"custom";s:24:"install_steamInstall.php";}s:9:"templates";a:1:{s:8:"skin_ucp";a:1:{s:11:"manageSteam";s:11:"manageSteam";}}s:6:"custom";s:16:"steamInstall.php";}]]></hook_extra_data>
       <hook_key>steam_login</hook_key>
       <hook_global_caches/>
     </config>
@@ -33,24 +33,23 @@ class steamDisplayButtonAjax
     public function __construct()
     {
         $this->registry = ipsRegistry::instance();
-        $this->lang     = $this->registry->getClass('class_localization');
-        ipsRegistry::getClass('class_localization')->loadLanguageFile( array( 'public_steam_login' ), 'core' );
+        $this->lang = $this->registry->getClass('class_localization');
+        ipsRegistry::getClass('class_localization')->loadLanguageFile(array('public_steam_login'), 'core');
     }
-    
+
     public function getOutput()
     {
         $base_url = ipsRegistry::$settings['base_url'];
         $board_url = ipsRegistry::$settings['board_url'];
         $hash = ipsRegistry::instance()->member()->form_hash;
-        if(IPSLib::loginMethod_enabled('facebook') || IPSLib::loginMethod_enabled('twitter') || IPSLib::loginMethod_enabled('live')){
+        if (IPSLib::loginMethod_enabled('facebook') || IPSLib::loginMethod_enabled('twitter') || IPSLib::loginMethod_enabled('live')) {
             $IPBHTML = <<<HTML
 <li><a href="{$base_url}app=core&amp;module=global&amp;section=login&amp;do=process&amp;use_steam=1&amp;auth_key={$hash}" class='ipsButton_secondary'><img src='{$board_url}/public/style_extra/signin/login-steam-icon.png' alt='Steam' /> &nbsp; {$this->lang->words['use_steam']}</a></li>
 HTML;
         }
         return $IPBHTML;
     }
-}
-?>]]></hooks_source>
+}]]></hooks_source>
     </file>
     <file>
       <hook_file_real>steamDisplayButtonAjax2.php</hook_file_real>
@@ -88,8 +87,7 @@ HTML;
         }
         return $IPBHTML;
     }               
-}
-?>]]></hooks_source>
+}]]></hooks_source>
     </file>
     <file>
       <hook_file_real>steamHandleData.php</hook_file_real>
@@ -102,19 +100,17 @@ HTML;
  * @copyright 2012
  * @license http://opensource.org/licenses/mit-license.php The MIT License
  */
-class steamHandleData 
+class steamHandleData
 {
     public function handleData( $data )
     {
         /* Add additional fields to be queried */
         $data['members'] = array_merge( $data['members'], array( 'steamid' ) );
-        
+
         /* Return */
         return $data;
     }
-}
-?>
-]]></hooks_source>
+}]]></hooks_source>
     </file>
     <file>
       <hook_file_real>steamDisplayButton.php</hook_file_real>
@@ -147,8 +143,7 @@ HTML;
 
         return $IPBHTML;
     }
-}
-?>]]></hooks_source>
+}]]></hooks_source>
     </file>
     <file>
       <hook_file_real>steamDisplayIcon.php</hook_file_real>
@@ -175,8 +170,7 @@ class steamDisplayIcon
         $IPBHTML = "<a href='".ipsRegistry::$settings['base_url']."app=core&amp;module=global&amp;section=login&amp;do=process&amp;use_steam=1&amp;auth_key=".ipsRegistry::instance()->member()->form_hash."'><img src='".ipsRegistry::$settings['board_url']."/public/style_extra/signin/login-steam-icon.png' alt='{$this->lang->words['log_in_steam']}' /></a>\n";
         return $IPBHTML;
     }
-}
-?>]]></hooks_source>
+}]]></hooks_source>
     </file>
     <file>
       <hook_file_real>steamDisplayButtonRegister2.php</hook_file_real>
@@ -218,8 +212,7 @@ HTML;
         }
         return $IPBHTML;
     }
-}
-?>]]></hooks_source>
+}]]></hooks_source>
     </file>
     <file>
       <hook_file_real>steamDisplayButtonRegister.php</hook_file_real>
@@ -253,8 +246,7 @@ HTML;
         }
         return $IPBHTML;
     }
-}
-?>]]></hooks_source>
+}]]></hooks_source>
     </file>
     <file>
       <hook_file_real>steamLinkAccount.php</hook_file_real>
@@ -343,10 +335,32 @@ class steamLinkAccount extends (~extends~)
 
         return parent::showForm( $current_area, $errors );
     }
-} 
-?>]]></hooks_source>
+}]]></hooks_source>
     </file>
   </hookfiles>
+  <hookextras_custom>
+    <file>
+      <filename>steamInstall.php</filename>
+      <source><![CDATA[<?php
+class steamInstall
+{
+    public function install()
+    {
+        if(!ipsRegistry::DB()->checkForField('steamid', 'members'))
+        {
+            ipsRegistry::DB()->addField('members', 'steamid', 'VARCHAR(17)', NULL);
+        }
+    }
+    public function uninstall()
+    {
+        if(ipsRegistry::DB()->checkForField('steamid', 'members'))
+        {
+            ipsRegistry::DB()->dropField('members', 'steamid');
+        }
+    }
+}]]></source>
+    </file>
+  </hookextras_custom>
   <hookextras_settings/>
   <hookextras_language/>
   <hookextras_modules/>
