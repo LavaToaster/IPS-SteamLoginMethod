@@ -52,13 +52,7 @@ class steamLinkAccount extends usercpForms_core
                     /* Test locally */
                     $localMember = $this->DB->buildAndFetch(array('select' => '*', 'from' => 'members', 'where' => "steamid='".$steam_id."'"));
                     $notify = '';
-                    if ( $localMember['member_id'] && !$localMember['members_display_name'] )
-                    {
-                        IPSMember::remove( $localMember['member_id'] , false );
-                        IPSMember::save( $this->memberData['member_id'], array( 'core' => array( 'steamid' => $steam_id ) ) );
-                        $notify .= "&completed=1";
-                    }
-                    elseif( !$localMember['member_id'])
+                    if ( $localMember['member_id'])
                     {
                         IPSMember::save( $this->memberData['member_id'], array( 'core' => array( 'steamid' => $steam_id ) ) );
                         $notify .= "&completed=1";
