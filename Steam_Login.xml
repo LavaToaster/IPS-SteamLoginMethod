@@ -11,7 +11,7 @@
       <hook_requirements><![CDATA[a:3:{s:21:"required_applications";a:0:{}s:20:"hook_php_version_min";s:0:"";s:20:"hook_php_version_max";s:0:"";}]]></hook_requirements>
       <hook_version_human>1.1.0</hook_version_human>
       <hook_version_long>11000</hook_version_long>
-      <hook_extra_data><![CDATA[a:5:{s:7:"display";a:3:{s:8:"language";s:197:"From core_public_steam_login: log_in_steam, manage_steam, sign_in_steam, steam_already_linked, steam_linked_account, steam_link_account, unlink_steam, unlink_steam_desc, unlink_steam_sub, use_steam";s:9:"templates";s:100:"From skin_steamlogin: globalTemplateIcon, inlineLoginButton, registerFormButton, showLoginFormButton";s:6:"custom";s:24:"install_steamInstall.php";}s:9:"templates";a:1:{s:15:"skin_steamlogin";a:4:{i:0;s:18:"globalTemplateIcon";i:1;s:17:"inlineLoginButton";i:2;s:18:"registerFormButton";i:3;s:19:"showLoginFormButton";}}s:6:"custom";s:16:"steamInstall.php";s:8:"database";a:0:{}s:8:"language";a:1:{s:23:"core_public_steam_login";a:10:{i:0;s:9:"use_steam";i:1;s:13:"sign_in_steam";i:2;s:12:"manage_steam";i:3;s:20:"steam_already_linked";i:4;s:12:"log_in_steam";i:5;s:18:"steam_link_account";i:6;s:20:"steam_linked_account";i:7;s:12:"unlink_steam";i:8;s:17:"unlink_steam_desc";i:9;s:16:"unlink_steam_sub";}}}]]></hook_extra_data>
+      <hook_extra_data><![CDATA[a:4:{s:7:"display";a:3:{s:8:"language";s:197:"From core_public_steam_login: log_in_steam, manage_steam, sign_in_steam, steam_already_linked, steam_linked_account, steam_link_account, unlink_steam, unlink_steam_desc, unlink_steam_sub, use_steam";s:9:"templates";s:132:"From skin_steamlogin: globalTemplateIcon, inlineLoginButton, registerFormButton, showLoginFormButton<br />From skin_ucp: manageSteam";s:6:"custom";s:24:"install_steamInstall.php";}s:8:"language";a:1:{s:23:"core_public_steam_login";a:10:{i:0;s:9:"use_steam";i:1;s:13:"sign_in_steam";i:2;s:12:"manage_steam";i:3;s:20:"steam_already_linked";i:4;s:12:"log_in_steam";i:5;s:18:"steam_link_account";i:6;s:20:"steam_linked_account";i:7;s:12:"unlink_steam";i:8;s:17:"unlink_steam_desc";i:9;s:16:"unlink_steam_sub";}}s:9:"templates";a:2:{s:15:"skin_steamlogin";a:4:{i:0;s:18:"globalTemplateIcon";i:1;s:17:"inlineLoginButton";i:2;s:18:"registerFormButton";i:3;s:19:"showLoginFormButton";}s:8:"skin_ucp";a:1:{i:0;s:11:"manageSteam";}}s:6:"custom";s:16:"steamInstall.php";}]]></hook_extra_data>
       <hook_key>steam_login</hook_key>
       <hook_global_caches/>
     </config>
@@ -540,6 +540,63 @@ class steamInstall
       <template_content><![CDATA[<!--no data in this master skin-->]]></template_content>
       <template_name>showLoginFormButton</template_name>
       <template_data/>
+      <template_updated>1414100248</template_updated>
+      <template_removable>0</template_removable>
+      <template_added_to>0</template_added_to>
+      <template_user_added>0</template_user_added>
+      <template_user_edited>0</template_user_edited>
+      <template_master_key>mobile</template_master_key>
+    </templates>
+    <templates>
+      <template_group>skin_ucp</template_group>
+      <template_content><![CDATA[<if test="$this->request['error']">
+<p class='message error'>{$this->lang->words['steam_already_linked']}</p>
+<br />
+</if>
+<if test="! $this->memberData['steamid']">
+    <div>
+        <p class='message'>{$this->lang->words['steam_link_account']}</p>
+        <br />
+        <br />
+        <a href='{$data['url']}' title='{$this->lang->words['log_in_steam']}'><img src='{$this->settings['board_url']}/public/style_extra/signin/login-steam.png'/></a>
+        <br />
+        <br />
+    </div>
+    <else />
+    <div>
+        <p class='message'>{$this->lang->words['steam_linked_account']}</p>
+        <br />
+        <h3 class='ipsType_subtitle'>{$this->lang->words['unlink_steam_sub']}</h3>
+        <p>{$this->lang->words['unlink_steam_desc']}</p><br />
+        <p><a href="{$this->settings['base_url']}app=core&module=usercp&tab=core&area=managesteam&steam=unlink" class='ipsButton_secondary'>{$this->lang->words['unlink_steam']}</a></p>
+    </div>
+</if>]]></template_content>
+      <template_name>manageSteam</template_name>
+      <template_data>$data</template_data>
+      <template_updated>1414100247</template_updated>
+      <template_removable>0</template_removable>
+      <template_added_to>0</template_added_to>
+      <template_user_added>0</template_user_added>
+      <template_user_edited>0</template_user_edited>
+      <template_master_key>root</template_master_key>
+    </templates>
+    <templates>
+      <template_group>skin_ucp</template_group>
+      <template_content><![CDATA[<!--no data in this master skin-->]]></template_content>
+      <template_name>manageSteam</template_name>
+      <template_data>$data</template_data>
+      <template_updated>1414100247</template_updated>
+      <template_removable>0</template_removable>
+      <template_added_to>0</template_added_to>
+      <template_user_added>0</template_user_added>
+      <template_user_edited>0</template_user_edited>
+      <template_master_key>xmlskin</template_master_key>
+    </templates>
+    <templates>
+      <template_group>skin_ucp</template_group>
+      <template_content><![CDATA[<!--no data in this master skin-->]]></template_content>
+      <template_name>manageSteam</template_name>
+      <template_data>$data</template_data>
       <template_updated>1414100248</template_updated>
       <template_removable>0</template_removable>
       <template_added_to>0</template_added_to>
