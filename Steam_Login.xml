@@ -226,7 +226,7 @@ class steamLinkAccount extends (~extends~)
         $target = 6;
         
         if(count($return) < $target) {
-          $target = count($return);
+          $target = count($return) - 1;
         }
         
         foreach ($return as $tabk => $tabv) {
