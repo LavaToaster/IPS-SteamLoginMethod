@@ -11,21 +11,28 @@ class steamLinkAccount extends usercpForms_core
     {
         $this->lang->loadLanguageFile(array('public_steam_login'));
         $return = parent::getLinks();
+        $totalLinks = count($return);
+        $target = 6;
+
+        if ($totalLinks - 1 < $target) {
+            $target = $totalLinks - 1;
+        }
+
         foreach ($return as $tabk => $tabv) {
-            if ($tabk == 6) {
-                $return[6] = array('url' => 'area=managesteam',
-                    'title' => $this->lang->words['manage_steam'],
-                    'active' => $this->request['tab'] == 'core' && $this->request['area'] == 'managesteam' ? 1 : 0,
-                    'area' => 'managesteam'
-                );
-                $return[7] = $tabv;
-            } elseif ($tabk > 6) {
+            if ($tabk >= $target) {
+                if ($tabk == $target) {
+                    $return[$tabk] = array('url' => 'area=managesteam',
+                        'title' => $this->lang->words['manage_steam'],
+                        'active' => $this->request['tab'] == 'core' && $this->request['area'] == 'managesteam' ? 1 : 0,
+                        'area' => 'managesteam'
+                    );
+                }
                 $return[$tabk + 1] = $tabv;
             } else {
                 $return[$tabk] = $tabv;
             }
         }
-
+        
         return $return;
     }
 
