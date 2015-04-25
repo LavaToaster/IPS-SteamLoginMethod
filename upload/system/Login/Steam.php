@@ -238,7 +238,7 @@ class _Steam extends \IPS\Login\LoginAbstract
 	{
 		$params = array(
 			'openid.signed' => \IPS\Request::i()->openid_signed,
-			'openid.sig' => \IPS\Request::i()->openid_sig,
+			'openid.sig' => str_replace(' ', '+', \IPS\Request::i()->openid_sig),
 			'openid.ns' => 'http://specs.openid.net/auth/2.0',
 		);
 
