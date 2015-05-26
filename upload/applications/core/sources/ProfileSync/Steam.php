@@ -34,9 +34,8 @@ class _Steam extends ProfileSyncAbstract
 
 		/* If an api key is provided, attempt to load the user from steam */
 		$response = null;
-		$userData = null;
 
-		if($loginHandler->settings['api_key']) {
+		if ($loginHandler->settings['api_key']) {
 			try {
 				$response = \IPS\Http\Url::external("http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key={$loginHandler->settings['api_key']}&steamids={$this->member->steamid}")->request()->get()->decodeJson();
 
@@ -45,7 +44,7 @@ class _Steam extends ProfileSyncAbstract
 					return $response['response']['players'][0];
 				}
 			} catch ( \IPS\Http\Request\Exception $e ) {
-
+				// Fall through to return NULL below
 			}
 		}
 
@@ -69,15 +68,17 @@ class _Steam extends ProfileSyncAbstract
 	 */
 	public function photo()
 	{
-		try
-		{
-			$user = $this->userData();
-			return \IPS\Http\Url::external( $user['avatarfull'] );
+		$user = $this->userData();
+
+		if ($user !== NULL && isset($user['avatarfull'])) {
+			try {
+				return \IPS\Http\Url::external($user['avatarfull']);
+			} catch ( \IPS\Http\Request\Exception $e ) {
+				// Fall through to return NULL below
+			}
 		}
-		catch ( \IPS\Http\Request\Exception $e )
-		{
-			return NULL;
-		}
+
+		return NULL;
 	}
 
 	/**
@@ -87,16 +88,13 @@ class _Steam extends ProfileSyncAbstract
 	 */
 	public function name()
 	{
-		try
-		{
-			$user = $this->userData();
+		$user = $this->userData();
 
+		if ($user !== NULL && isset($user['personaname'])) {
 			return $user['personaname'];
 		}
-		catch ( \IPS\Http\Request\Exception $e )
-		{
-			return NULL;
-		}
+
+		return NULL;
 	}
 
 	/**
