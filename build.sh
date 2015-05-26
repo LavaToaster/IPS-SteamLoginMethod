@@ -5,7 +5,7 @@ IPS_PLUGINKEY="steamlogin"
 echo "Creating Directories..."
 mkdir -p ./upload/applications/core/interface/steam
 mkdir -p ./upload/applications/core/sources/ProfileSync
-mkdir -p ./upload/upload/system/Login
+mkdir -p ./upload/system/Login
 
 echo "Copying Files..."
 cp ${IPS_FOLDER}/applications/core/interface/steam/auth.php upload/applications/core/interface/steam
