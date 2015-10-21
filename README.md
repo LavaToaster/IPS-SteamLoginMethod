@@ -5,6 +5,7 @@ This Plugin for IPS 4.0+ will allow your users to login with their Steam account
 ##Recommended Installation Requirements:
 * Minimum IP.Core Requirements ( as found on https://community.invisionpower.com/files/file/7046-get-ready-for-ips-40/ )
  - If you are using InvisonPower's Hosted forums, this is already done for you.
+* Is curl enabled? If not, install/enable it please.
 * Hosting with Free services will not be supported
  - If you are having issues, and use IIS as your web server. Please try switching to Apache or another server type. IIS is known to have random issues.
 
