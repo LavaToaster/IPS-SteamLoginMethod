@@ -72,8 +72,10 @@ class _Steam extends ProfileSyncAbstract
 
 		if ($user !== NULL && isset($user['avatarfull'])) {
 			try {
-				return \IPS\Http\Url::external($user['avatarfull']);
-			} catch ( \IPS\Http\Request\Exception $e ) {
+				return $file = \IPS\Http\Url::external($user['avatarfull'])->import( 'core_Profile' );
+				$photo = \IPS\Image::create( $file->contents() );
+			} 
+			catch ( \IPS\Http\Request\Exception $e ) {
 				// Fall through to return NULL below
 			}
 		}
