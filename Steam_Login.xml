@@ -10,9 +10,9 @@ public static function furlDefinition( $revert=FALSE )
 		{
 			$furls = parent::furlDefinition($revert);
 	
-			if ( !isset( $furls['settings_newtab'] ) )
+			if ( !isset( $furls['settings_Steam'] ) )
 			{
-				$furls['settings_newtab'] = array(
+				$furls['settings_Steam'] = array(
 					'friendly'  => 'settings/steam',
 					'real'      => 'app=core&module=system&controller=settings&area=profilesync&service=Steam'
 				);
