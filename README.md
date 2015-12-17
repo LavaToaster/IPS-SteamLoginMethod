@@ -1,6 +1,6 @@
 Sign in through Steam
 =====================
-This Plugin for IPS 4.0+ will allow your users to login with their Steam account.
+This Plugin for IPS 4.1+ will allow your users to login with their Steam account.
 
 ##Recommended Installation Requirements:
 * Minimum IP.Core Requirements ( as found on https://community.invisionpower.com/files/file/7046-get-ready-for-ips-40/ )
