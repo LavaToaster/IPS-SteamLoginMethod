@@ -1,6 +1,13 @@
 #!/usr/bin/env bash
-IPS_FOLDER="../IPS4/"
-IPS_PLUGINKEY="steamlogin"
+# Example environment variables
+#
+# IPS_FOLDER="../IPB/"
+# IPS_PLUGINKEY="steamlogin"
+#
+# Example command:
+#
+# IPS_FOLDER="../IPB/" IPS_PLUGINKEY="steamlogin" sh build.sh
+#
 
 echo "Creating Directories..."
 mkdir -p ./upload/applications/core/interface/steam
