@@ -15,5 +15,5 @@ This Plugin for IPS 4.0+ will allow your users to login with their Steam account
 2. Login to your ACP, and browse to System -> Plugins
 3. Click Install New Plugin. Browse to the extracted zip file and upload steam_login.xml
 4. Visit - http://steamcommunity.com/dev/apikey and follow the instructions to obtain an API key
-5. Navigate to System -> Login Methods, click the edit icon on the Steam row and paste your API key in the API Key input and save
+5. Navigate to System -> Settings -> Login Handlers, click the edit icon on the Steam row and paste your API key in the API Key input and save
 6. Make sure to enable both plugin and login method.
