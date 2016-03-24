@@ -46,6 +46,19 @@ class _Steam extends \IPS\Login\LoginAbstract
 	}
 
 	/**
+	 * Can a member sign in with this login handler?
+	 * Used to ensure when a user disassociates a social login that they have some other way of logging in
+	 *
+	 * @param	\IPS\Member	$member	The member
+	 * @return	bool
+	 */
+	public function canProcess(\IPS\Member $member)
+	{
+		// Return a truthy or falsy value
+		return (bool) $member->steamid;
+	}
+
+	/**
 	 * Authenticate
 	 *
 	 * @param    string      $url    The URL for the login page
