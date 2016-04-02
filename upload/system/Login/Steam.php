@@ -55,7 +55,7 @@ class _Steam extends \IPS\Login\LoginAbstract
 	public function canProcess(\IPS\Member $member)
 	{
 		// Return a truthy or falsy value
-		return (bool) $member->steamid;
+		return ( $member->steamid );
 	}
 
 	/**
