@@ -21,6 +21,8 @@ Click Manage Hooks. Browse for and import the supplied 'Steam_Login.xml' hook.
 Step 5:
 Enjoy your day as all should be well!
 
+*note if your site is running https, make sure to turn on the 'login with https' setting otherwise this plugin will have issues. It is an OpenID erorr if you send wrong addresses by leaving this setting off.
+
 -----------------
 
 Updrading:
