@@ -255,10 +255,19 @@ class _Steam extends \IPS\Login\LoginAbstract
 			'openid.ns' => 'http://specs.openid.net/auth/2.0',
 		);
 
+		foreach ($params as $key => &$value) {
+			$value = urldecode($value);
+		}
+
 		// Get all the params that were sent back and resend them for validation
-		$signed = explode(',', \IPS\Request::i()->openid_signed);
+		$signed = explode(',', urldecode(\IPS\Request::i()->openid_signed));
 		foreach ($signed as $item) {
 			$val = \IPS\Request::i()->{'openid_' . str_replace('.', '_', $item)};
+
+			if ($item !== 'response_nonce' || strpos($val, '%') !== false) {
+				$val = urldecode($val);
+			}
+
 			$params['openid.' . $item] = get_magic_quotes_gpc() ? stripslashes($val) : $val;
 		}
 
@@ -266,9 +275,8 @@ class _Steam extends \IPS\Login\LoginAbstract
 		$params['openid.mode'] = 'check_authentication';
 
 		// Validate whether it's true and if we have a good ID
-		preg_match("#^http://steamcommunity.com/openid/id/([0-9]{17,25})#", $_GET['openid_claimed_id'], $matches);
+		preg_match("#^http://steamcommunity.com/openid/id/([0-9]{17,25})#", urldecode($_GET['openid_claimed_id']), $matches);
 		$steamID64 = is_numeric($matches[1]) ? $matches[1] : 0;
-
 
 		$response = (string)\IPS\Http\Url::external('https://steamcommunity.com/openid/login')->request()->post($params);
 
@@ -286,5 +294,4 @@ class _Steam extends \IPS\Login\LoginAbstract
 		// Return our final value
 		return $values['is_valid'] === 'true' ? $steamID64 : false;
 	}
-
 }
