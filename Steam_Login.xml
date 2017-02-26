@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugin name="Sign in through Steam" version_long="20002" version_human="2.0.2" author="Adam Lavin" website="https://adamlav.in" update_check="https://raw.githubusercontent.com/Lavoaster/IP.Board-Steam-Authentication-Method/master/version.json"><hooks><hook type="C" class="\IPS\Http\Url" filename="steamfurl"><![CDATA[//<?php
+<plugin name="Sign in through Steam" version_long="20003" version_human="2.0.3" author="Adam Lavin" website="https://adamlav.in" update_check="https://raw.githubusercontent.com/Lavoaster/IP.Board-Steam-Authentication-Method/master/version.json"><hooks><hook type="C" class="\IPS\Http\Url" filename="steamfurl"><![CDATA[//<?php
 class hook257 extends _HOOK_CLASS_
 {
 public static function furlDefinition( $revert=FALSE )
@@ -136,6 +136,35 @@ if ( !defined( '\IPS\SUITE_UNIQUE_KEY' ) )
  * 2.0.2 Upgrade Code
  */
 class ips_plugins_setup_upg_20002
+{
+	/**
+	 * ...
+	 *
+	 * @return	array	If returns TRUE, upgrader will proceed to next step. If it returns any other value, it will set this as the value of the 'extra' GET parameter and rerun this step (useful for loops)
+	 */
+	public function step1()
+	{
+		
+
+		return TRUE;
+	}
+	
+	// You can create as many additional methods (step2, step3, etc.) as is necessary.
+	// Each step will be executed in a new HTTP request
+}]]></version><version long="20003" human="2.0.3"><![CDATA[//<?php
+
+
+/* To prevent PHP errors (extending class does not exist) revealing path */
+if ( !defined( '\IPS\SUITE_UNIQUE_KEY' ) )
+{
+	header( ( isset( $_SERVER['SERVER_PROTOCOL'] ) ? $_SERVER['SERVER_PROTOCOL'] : 'HTTP/1.0' ) . ' 403 Forbidden' );
+	exit;
+}
+
+/**
+ * 2.0.3 Upgrade Code
+ */
+class ips_plugins_setup_upg_20003
 {
 	/**
 	 * ...
