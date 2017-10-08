@@ -1,36 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugin name="Sign in through Steam" version_long="20003" version_human="2.0.3" author="Adam Lavin" website="https://adamlav.in" update_check="https://raw.githubusercontent.com/Lavoaster/IP.Board-Steam-Authentication-Method/master/version.json"><hooks><hook type="C" class="\IPS\Http\Url" filename="steamfurl"><![CDATA[//<?php
-class hook257 extends _HOOK_CLASS_
+<plugin name="Sign in through Steam" version_long="20003" version_human="2.0.3" author="Adam Lavin" website="https://adamlav.in" update_check="https://raw.githubusercontent.com/Lavoaster/IP.Board-Steam-Authentication-Method/master/version.json"><hooks><hook type="C" class="\IPS\Http\Url\Friendly" filename="steamfurlfriendly"><![CDATA[//<?php
+
+/* To prevent PHP errors (extending class does not exist) revealing path */
+if ( !defined( '\IPS\SUITE_UNIQUE_KEY' ) )
+{
+	exit;
+}
+class hook191 extends _HOOK_CLASS_
 {
 public static function furlDefinition( $revert=FALSE )
 	{
 		try
 		{
-			$furls = parent::furlDefinition($revert);
-	
-			if ( !isset( $furls['settings_Steam'] ) )
-			{
-				$furls['settings_Steam'] = array(
-					'friendly'  => 'settings/steam',
-					'real'      => 'app=core&module=system&controller=settings&area=profilesync&service=Steam'
-				);
+				$furls = parent::furlDefinition($revert);
+		
+				if ( !isset( $furls['settings_Steam'] ) )
+				{
+					$furls['settings_Steam'] = array(
+						'friendly'  => 'settings/steam',
+						'real'      => 'app=core&module=system&controller=settings&area=profilesync&service=Steam',
+	                  'regex'    	=> array('settings\/steam'),
+	                  'params'   	=> array(),
+					);
+				}
+		
+				return $furls;
 			}
-	
-			return $furls;
+			catch ( \RuntimeException $e )
+			{
+				if ( method_exists( get_parent_class(), __FUNCTION__ ) )
+				{
+					return call_user_func_array( 'parent::' . __FUNCTION__, func_get_args() );
+				}
+				else
+				{
+					throw $e;
+				}
+			}
 		}
-		catch ( \RuntimeException $e )
-		{
-			if ( method_exists( get_parent_class(), __FUNCTION__ ) )
-			{
-				return call_user_func_array( 'parent::' . __FUNCTION__, func_get_args() );
-			}
-			else
-			{
-				throw $e;
-			}
-		}
-	}
-}]]></hook></hooks><tasks/><widgets/><htmlFiles><html filename="steam.phtml">PGlwczp0ZW1wbGF0ZSBwYXJhbWV0ZXJzPSIkdXJsIiAvPgoKPGEgaHJlZj0neyR1cmx9JyBjbGFzcz0naXBzQnV0dG9uIGlwc0J1dHRvbl92ZXJ5U21hbGwgaXBzQnV0dG9uX2Z1bGxXaWR0aCBpcHNTb2NpYWwgaXBzU29jaWFsX3N0ZWFtJz4KCTxzcGFuIGNsYXNzPSdpcHNTb2NpYWxfaWNvbic+PGkgY2xhc3M9J2ZhIGZhLXN0ZWFtJz48L2k+PC9zcGFuPgoJPHNwYW4gY2xhc3M9J2lwc1NvY2lhbF90ZXh0Jz57bGFuZz0ibG9naW5fc3RlYW0ifTwvc3Bhbj4KPC9hPg==</html></htmlFiles><cssFiles><css filename="buttons.css">Lmlwc1NvY2lhbF9zdGVhbSB7CiAgICBiYWNrZ3JvdW5kLWNvbG9yOiAjMTcxYTIxOwp9CgouaXBzU29jaWFsX3N0ZWFtIC5pcHNTb2NpYWxfaWNvbiB7CiAgICBiYWNrZ3JvdW5kOiAjMmIzMjNkOwp9</css></cssFiles><jsFiles/><resourcesFiles/><lang><word key="login_handler_Steam" js="0">Steam</word><word key="profilesync__Steam" js="0">Steam</word><word key="login_steam" js="0">Sign in with Steam</word><word key="login_steam_key" js="0">Steam API Key</word><word key="login_steam_key_desc" js="0"><![CDATA[Entering a Steam API Key will provide additional features. You can find or register for an api key <a href="http://steamcommunity.com/dev/apikey" target="_blank">here</a>.]]></word><word key="login_steam_name" js="0">Use Steam Username?</word><word key="login_steam_name_desc" js="0">If this is set to true then when a new member logs through Steam it will attempt to use their steam username as their username on the forums, if it is taken or If this setting is disabled then they will be prompted to provide a username.</word></lang><versions><version long="10000" human="1.0.0"><![CDATA[//<?php
+}
+]]></hook></hooks><tasks/><widgets/><htmlFiles><html filename="steam.phtml">PGlwczp0ZW1wbGF0ZSBwYXJhbWV0ZXJzPSIkdXJsIiAvPgoKPGEgaHJlZj0neyR1cmx9JyBjbGFzcz0naXBzQnV0dG9uIGlwc0J1dHRvbl92ZXJ5U21hbGwgaXBzQnV0dG9uX2Z1bGxXaWR0aCBpcHNTb2NpYWwgaXBzU29jaWFsX3N0ZWFtJz4KCTxzcGFuIGNsYXNzPSdpcHNTb2NpYWxfaWNvbic+PGkgY2xhc3M9J2ZhIGZhLXN0ZWFtJz48L2k+PC9zcGFuPgoJPHNwYW4gY2xhc3M9J2lwc1NvY2lhbF90ZXh0Jz57bGFuZz0ibG9naW5fc3RlYW0ifTwvc3Bhbj4KPC9hPg==</html></htmlFiles><cssFiles><css filename="buttons.css">Lmlwc1NvY2lhbF9zdGVhbSB7CiAgICBiYWNrZ3JvdW5kLWNvbG9yOiAjMTcxYTIxOwp9CgouaXBzU29jaWFsX3N0ZWFtIC5pcHNTb2NpYWxfaWNvbiB7CiAgICBiYWNrZ3JvdW5kOiAjMmIzMjNkOwp9</css></cssFiles><jsFiles/><resourcesFiles/><lang><word key="login_handler_Steam" js="0">Steam</word><word key="profilesync__Steam" js="0">Steam</word><word key="login_steam" js="0">Sign in with Steam</word><word key="login_steam_key" js="0">Steam API Key</word><word key="login_steam_key_desc" js="0"><![CDATA[Entering a Steam API Key will provide additional features. You can find or register for an api key <a href="http://steamcommunity.com/dev/apikey" target="_blank">here</a>.]]></word><word key="login_steam_name" js="0">Use Steam Username?</word><word key="login_steam_name_desc" js="0">If this is set to true then when a new member logs through Steam it will attempt to use their steam username as their username on the forums, if it is taken or If this setting is disabled then they will be prompted to provide a username.</word></lang><versions><version long="10000" human="1.0.0"><![CDATA[//<?php
 
 
 /* To prevent PHP errors (extending class does not exist) revealing path */
@@ -151,33 +160,4 @@ class ips_plugins_setup_upg_20002
 	
 	// You can create as many additional methods (step2, step3, etc.) as is necessary.
 	// Each step will be executed in a new HTTP request
-}]]></version><version long="20003" human="2.0.3"><![CDATA[//<?php
-
-
-/* To prevent PHP errors (extending class does not exist) revealing path */
-if ( !defined( '\IPS\SUITE_UNIQUE_KEY' ) )
-{
-	header( ( isset( $_SERVER['SERVER_PROTOCOL'] ) ? $_SERVER['SERVER_PROTOCOL'] : 'HTTP/1.0' ) . ' 403 Forbidden' );
-	exit;
-}
-
-/**
- * 2.0.3 Upgrade Code
- */
-class ips_plugins_setup_upg_20003
-{
-	/**
-	 * ...
-	 *
-	 * @return	array	If returns TRUE, upgrader will proceed to next step. If it returns any other value, it will set this as the value of the 'extra' GET parameter and rerun this step (useful for loops)
-	 */
-	public function step1()
-	{
-		
-
-		return TRUE;
-	}
-	
-	// You can create as many additional methods (step2, step3, etc.) as is necessary.
-	// Each step will be executed in a new HTTP request
-}]]></version></versions></plugin>
+}]]></version><version long="20003" human="2.0.3"/></versions></plugin>
