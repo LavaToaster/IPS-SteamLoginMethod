@@ -37,7 +37,7 @@ class _Steam extends ProfileSyncAbstract
 
 		if ($loginHandler->settings['api_key']) {
 			try {
-				$response = \IPS\Http\Url::external("http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key={$loginHandler->settings['api_key']}&steamids={$this->member->steamid}")->request()->get()->decodeJson();
+				$response = \IPS\Http\Url::external("https://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key={$loginHandler->settings['api_key']}&steamids={$this->member->steamid}")->request()->get()->decodeJson();
 
 				if ($response) {
 					// Get the first player
