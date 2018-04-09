@@ -247,7 +247,7 @@ class _Steam extends \IPS\Login\LoginAbstract
 	 *
 	 * @return int|bool
 	 */
-	private function validate()
+	protected function validate()
 	{
 		$params = array(
 			'openid.signed' => \IPS\Request::i()->openid_signed,
