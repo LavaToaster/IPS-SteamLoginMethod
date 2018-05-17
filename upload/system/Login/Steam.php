@@ -24,6 +24,16 @@ class _Steam extends \IPS\Login\LoginAbstract
 	public static $icon = 'steam';
 
 	/**
+	 * Get title
+	 *
+	 * @return	string
+	 */
+	public static function getTitle()
+	{
+		return 'Steam';
+	}
+
+	/**
 	 * Get Form
 	 *
 	 * @param    string $url The URL for the login page

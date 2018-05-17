@@ -39,17 +39,17 @@ class ips_plugins_setup_install
 		$doesNotExist = false;
 
 		try {
-			\IPS\Db::i()->select('login_key', 'core_login_handlers', array('login_key=?', 'steam'))->first();
+			\IPS\Db::i()->select('login_classname', 'core_login_methods', array('login_classname=?', 'IPS\Login\Steam'))->first();
 		} catch (UnderflowException $e) {
 			$doesNotExist = true;
 		}
 
 		if ($doesNotExist) {
-			$maxLoginOrder = \IPS\Db::i()->select('MAX(login_order)', 'core_login_handlers')->first();
+			$maxLoginOrder = \IPS\Db::i()->select('MAX(login_order)', 'core_login_methods')->first();
 
-			\IPS\Db::i()->insert('core_login_handlers', array(
+			\IPS\Db::i()->insert('core_login_methods', array(
 				'login_settings' => '{"steam_apikey":"","use_steam_name":true}',
-				'login_key' => 'Steam',
+				'login_classname' => 'IPS\Login\Steam',
 				'login_enabled' => 1,
 				'login_order' => $maxLoginOrder + 1,
 				'login_acp' => 0
