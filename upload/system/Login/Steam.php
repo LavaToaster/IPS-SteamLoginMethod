@@ -257,7 +257,13 @@ class _Steam extends \IPS\Login\LoginAbstract
 	 */
 	private function get($param)
 	{
-		return str_replace(' ', '+', trim(urldecode(\IPS\Request::i()->{$param})));
+		$value = isset($_GET[$param]) ? $_GET[$param] : null;
+
+		if ($value === null) {
+			return null;
+		}
+
+		return trim(urldecode($value));
 	}
 
 	/**
