@@ -64,7 +64,7 @@ class _MigrateLoginData
                     \IPS\Db::i()->update(
                         'core_members',
                         ['steamid' => null],
-                        ['member_id' => $memberIds]
+                        ['member_id in (?)', implode(',', $memberIds)]
                     );
                 }
             }
