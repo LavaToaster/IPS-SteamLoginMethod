@@ -1,0 +1,6 @@
+{
+    "AddSteamToLoginHandlerMethods": {
+        "type": "C",
+        "class": "\\IPS\\Login\\Handler"
+    }
+}

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<language>
+ <app key="steamlogin" version="30000">
+  <word key="__app_steamlogin" js="0">Sign in through Steam</word>
+  <word key="login_steam_method" js="0">Steam</word>
+  <word key="login_steam" js="0">Sign in with Steam</word>
+  <word key="login_steam_key" js="0">Steam API Key</word>
+  <word key="login_steam_key_desc" js="0"><![CDATA[You can find or register for an api key <a href="https://steamcommunity.com/dev/apikey" target="_blank">here</a>.]]></word>
+  <word key="login_steam_name" js="0">Use Steam Username?</word>
+  <word key="login_steam_name_desc" js="0">If this is set to true then when a new member logs through Steam it will attempt to use their steam username as their username on the forums, if it is taken or If this setting is disabled then they will be prompted to provide a username.</word>
+  <word key="login_steam_openid_connection_failure" js="0">Unable to connect to Steam OpenID server.</word>
+  <word key="login_steam_openid_validation_failure" js="0">Unable to validate Steam OpenID request.</word>
+  <word key="login_steam_api_connection_failure" js="0">Unable to connect to Steam API.</word>
+  <word key="login_steam_api_config_failure" js="0">Steam didn't respond with anything when getting user data, please check API Key settings.</word>
+  <word key="login_steam_settings_api_connection_failure" js="0">Unable to verify to Steam Credentials.</word>
+  <word key="login_steam_migrating_login_data" js="0">Migrating Steam User Login Data</word>
+ </app>
+</language>

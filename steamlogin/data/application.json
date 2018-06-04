@@ -1,0 +1,8 @@
+{
+    "application_title": "Sign in through Steam",
+    "app_author": "Adam Lavin",
+    "app_directory": "steamlogin",
+    "app_protected": 0,
+    "app_website": "https:\/\/adamlav.in",
+    "app_update_check": "https:\/\/raw.githubusercontent.com\/Lavoaster\/IP.Board-Steam-Authentication-Method\/master\/version.json"
+}

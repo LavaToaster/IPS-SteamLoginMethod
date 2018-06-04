@@ -14,9 +14,10 @@ Notes:
 
 ## Installation
 
-1. First, upload the contents of the upload folder to your forum root directory.
-2. Login to your ACP, and browse to System -> Plugins
-3. Click Install New Plugin. Browse to the extracted zip file and upload steam_login.xml
-4. Visit - https://steamcommunity.com/dev/apikey and follow the instructions to obtain an API key
-5. Navigate to System -> Settings -> Login Handlers, click the edit icon on the Steam row and paste your API key in the API Key input and save
-6. Make sure to enable both plugin and login method.
+1. Login to your ACP, and browse to System -> Site Features -> Application
+2. Click Install. Upload steamlogin.tar
+3. Browse to System -> Settings -> Login & Registrations
+4. Within the methods tab, click Create New.
+5. Click Steam, Continue, and fill in the form modifying settings as you wish.
+6. It should now be ready to go. Go to your account settings to link your profile!
+7. (づ｡◕‿‿◕｡)づ 
