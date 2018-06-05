@@ -3,6 +3,8 @@ Steam Login Method
 
 This application for Invision Community Suite 4.3+ adds a Steam Login Method that allow your users to login with their Steam account.
 
+NOTE: This application IS NOT compatible with Invision Community Suite 4.2, you should continue using the plugin version.
+
 ## Installation Requirements:
 * Minimum Requirements for Invision Community Suite(as found on https://invisioncommunity.com/files/file/7046-get-ready-for-ips-community-suite/).
     * If you are using Invison Community Cloud Hosting, this is already done for you.
