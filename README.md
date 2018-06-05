@@ -1,10 +1,10 @@
 Steam Login Method
 ==================
 
-This Plugin for Invision Community 4.3+ adds a Steam Login Method that allow your users to login with their Steam account.
+This application for Invision Community Suite 4.3+ adds a Steam Login Method that allow your users to login with their Steam account.
 
 ## Installation Requirements:
-* Minimum IP.Core Requirements ( as found on https://invisioncommunity.com/files/file/7046-get-ready-for-ips-community-suite/ )
+* Minimum Requirements for Invision Community Suite(as found on https://invisioncommunity.com/files/file/7046-get-ready-for-ips-community-suite/).
     * If you are using Invison Community Cloud Hosting, this is already done for you.
 * Is curl enabled? If not, install and/or enable it.
 
