@@ -136,7 +136,7 @@ class _Steam extends \IPS\Login\Handler
     /**
      * Validates Steam OpenID request
      *
-     * @return bool|int
+     * @return bool|string
      */
     protected function validateAndGetSteamId()
     {
@@ -162,7 +162,7 @@ class _Steam extends \IPS\Login\Handler
 
         // Validate whether it's true and if we have a good ID
         preg_match('#^https://steamcommunity.com/openid/id/(\d{17,25})#', \IPS\Request::i()->openid_claimed_id, $matches);
-        $steamID64 = is_numeric($matches[1]) ? (int)$matches[1] : 0;
+        $steamID64 = is_numeric($matches[1]) ? $matches[1] : 0;
 
         try {
             $response = (string)\IPS\Http\Url::external('https://steamcommunity.com/openid/login')->request()->post($params);
