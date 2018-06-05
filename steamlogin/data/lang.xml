@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <language>
  <app key="steamlogin" version="30000">
-  <word key="__app_steamlogin" js="0">Sign in through Steam</word>
+  <word key="__app_steamlogin" js="0">Steam Login Method</word>
   <word key="login_steam_method" js="0">Steam</word>
   <word key="login_steam" js="0">Sign in with Steam</word>
   <word key="login_steam_key" js="0">Steam API Key</word>

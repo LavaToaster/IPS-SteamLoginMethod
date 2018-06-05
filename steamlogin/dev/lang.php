@@ -1,7 +1,7 @@
 <?php
 
 $lang = array(
-    '__app_steamlogin'                            => 'Sign in through Steam',
+    '__app_steamlogin'                            => 'Steam Login Method',
     'login_steam_method'                          => 'Steam',
     'login_steam'                                 => 'Sign in with Steam',
     'login_steam_key'                             => 'Steam API Key',
