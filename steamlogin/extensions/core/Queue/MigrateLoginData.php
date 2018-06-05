@@ -6,6 +6,9 @@ use function array_chunk;
 use function array_merge;
 use function array_unique;
 use function count;
+use function str_repeat;
+use function substr;
+use function var_dump;
 
 /* To prevent PHP errors (extending class does not exist) revealing path */
 if ( !defined( '\IPS\SUITE_UNIQUE_KEY' ) )
@@ -39,16 +42,17 @@ class _MigrateLoginData
         try {
             $membersWithDuplicateIds = [];
 
-            $query = \IPS\Db::i()->select(
-                'COUNT(member_id) as total, GROUP_CONCAT(member_id) as member_ids, steamid',
-                'core_members',
-                null,
-                null,
-                null,
-                'steamid',
-                'total > 1',
-                null
-            );
+            $query = \IPS\Db::i()
+                ->select(
+                    'COUNT(member_id) as total, GROUP_CONCAT(member_id) as member_ids, steamid',
+                    'core_members',
+                    null,
+                    null,
+                    null,
+                    'steamid',
+                    'total > 1',
+                    null
+                );
 
             foreach ($query as $row) {
                 $membersWithDuplicateIds[] = explode(',', $row['member_ids']);
@@ -60,11 +64,13 @@ class _MigrateLoginData
                 $chunkedMemberIds = array_chunk($membersWithDuplicateIds, 1000);
 
                 foreach ($chunkedMemberIds as $memberIds) {
+                    $boundParams = substr(str_repeat('?,', count($memberIds)), 0, -1);
+
                     // Update members in batches of 1000
                     \IPS\Db::i()->update(
                         'core_members',
                         ['steamid' => null],
-                        ['member_id in (?)', implode(',', $memberIds)]
+                        array_merge(['member_id in ('.$boundParams.')'], $memberIds)
                     );
                 }
             }
@@ -91,7 +97,7 @@ class _MigrateLoginData
 
         $method = \IPS\Db::i()
             ->select(
-                'login_classname',
+                '*',
                 'core_login_methods',
                 ['login_classname = ?', 'IPS\steamlogin\sources\Login\Steam']
             )
@@ -115,7 +121,7 @@ class _MigrateLoginData
         foreach ($query as $row) {
             $member = \IPS\Member::constructFromData($row);
             $insert[] = array(
-                'token_login_method' => $method['id'],
+                'token_login_method' => $method['login_id'],
                 'token_member'       => $member->member_id,
                 'token_identifier'   => $member->steamid,
                 'token_linked'       => 1,
